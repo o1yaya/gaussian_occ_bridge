@@ -1,0 +1,14 @@
+{
+  "scene": "ramen",
+  "queries": {
+    "chopsticks": {"status": "requires-query-export"},
+    "egg": {"status": "requires-query-export"},
+    "glass of water": {"status": "requires-query-export"},
+    "pork belly": {
+      "status": "mapped",
+      "mapping_file": "ramen_pork_belly_object_ids.json"
+    },
+    "wavy noodles in bowl": {"status": "requires-query-export"},
+    "yellow bowl": {"status": "requires-query-export"}
+  }
+}

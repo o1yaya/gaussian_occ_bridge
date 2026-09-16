@@ -88,3 +88,22 @@ Timing is a single local reference run, not a cross-platform benchmark.
 - No occupancy ground truth is available, so the run supports integration and efficiency
   claims only, not semantic OCC IoU/mIoU claims.
 
+## Query-to-object-ID bridge
+
+The separately exported `pork belly` target contains exactly two classifier IDs:
+
+| Object ID | Gaussian count | Ratio |
+|---:|---:|---:|
+| 212 | 10,310 | 56.58% |
+| 120 | 7,913 | 43.42% |
+
+The source PLY hash and classifier hash are recorded in
+`configs/ramen_pork_belly_object_ids.json`. When projected through the bounded full-scene
+semantic BEV, these IDs account for 48 labeled cells (31 from ID 212 and 17 from ID 120),
+47 of which have occupancy at least 0.5.
+
+![Pork belly query bridge](assets/ramen_pork_belly_query_bev.png)
+
+This establishes one human-readable anchor without assigning guessed names to the other
+45 active IDs. The remaining ramen queries require their own query-mask vote or isolated
+Gaussian export.

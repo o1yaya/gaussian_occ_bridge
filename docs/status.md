@@ -16,5 +16,7 @@
   published the hashed run summary, frozen filtering protocol and diagnostic figure.
 - Converted the complete 854,507-Gaussian `ramen` scene and 256-way classifier into a
   memory-bounded hard-label semantic occupancy baseline with 47 active object IDs.
+- Grounded classifier IDs 212 and 120 to the human-readable `pork belly` query using the
+  hashed 18,223-Gaussian query export; other query labels remain explicitly unmapped.
 
 Current claim level: a runnable reference baseline exists. Dataset-scale results, free-space ray supervision, dynamic reconstruction and ROS2 integration are not complete.

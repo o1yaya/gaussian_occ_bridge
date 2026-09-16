@@ -1,0 +1,28 @@
+{
+  "scene": "ramen",
+  "query": "pork belly",
+  "status": "mapped-from-query-isolated-ply",
+  "object_ids": [
+    212,
+    120
+  ],
+  "gaussian_count": 18223,
+  "object_id_histogram": [
+    {
+      "object_id": 212,
+      "gaussian_count": 10310,
+      "ratio": 0.5657685342698787
+    },
+    {
+      "object_id": 120,
+      "gaussian_count": 7913,
+      "ratio": 0.4342314657301213
+    }
+  ],
+  "min_ratio": 0.01,
+  "source_ply": "target.ply",
+  "source_ply_sha256": "6964e0eb137c243c807c19cfb1956cae72249d4e06c5f631a6c25e9b936defa0",
+  "classifier_npz": "ramen_classifier.npz",
+  "classifier_npz_sha256": "16e448eddb928db7e818fae95ca43974def2d7a974cf4c1d041c074d36296c9b",
+  "interpretation": "All mapped IDs belong to the exported query subset. This mapping does not assign human-readable names to any other classifier IDs."
+}

@@ -51,6 +51,21 @@ union. This is a memory-efficient reference baseline, not equivalent to full per
 evidence accumulation. See
 [`docs/full_scene_semantic_result.md`](docs/full_scene_semantic_result.md).
 
+### Human-readable query bridge
+
+The query-isolated `pork belly` PLY maps to classifier object IDs `212` and `120`:
+
+![Pork belly query mapping](docs/assets/ramen_pork_belly_query_bev.png)
+
+| Object ID | Query-export Gaussians | Share |
+|---:|---:|---:|
+| 212 | 10,310 | 56.58% |
+| 120 | 7,913 | 43.42% |
+
+In the bounded full-scene BEV these IDs occupy 48 labeled cells. The mapping is grounded
+in the exported query subset; the other classifier IDs remain unnamed until their own
+mask-vote/query exports are available.
+
 ### Real ILGS query export
 
 The adapter was run on an 18,223-Gaussian `pork belly` query export from the ILGS
