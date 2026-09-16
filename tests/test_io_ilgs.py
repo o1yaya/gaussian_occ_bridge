@@ -9,7 +9,11 @@ from plyfile import PlyData, PlyElement
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from gaussian_occ_bridge import load_ilgs_ply, quaternion_wxyz_to_matrix
+from gaussian_occ_bridge import (
+    load_ilgs_ply,
+    load_ilgs_ply_hard_labels,
+    quaternion_wxyz_to_matrix,
+)
 
 
 def _write_ilgs_ply(path: Path) -> None:
@@ -94,6 +98,24 @@ class ILGSPLYAdapterTests(unittest.TestCase):
         )
         self.assertEqual(batch.semantic_source, "obj_dc_* + classifier_npz")
 
+    def test_chunked_hard_object_ids(self):
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            ply_path = directory / "point_cloud.ply"
+            classifier_path = directory / "classifier.npz"
+            _write_ilgs_ply(ply_path)
+            np.savez(
+                classifier_path,
+                weight=np.array([[1.0, 0.0], [0.0, 1.0]], dtype=np.float32),
+                bias=np.zeros(2, dtype=np.float32),
+            )
+            batch = load_ilgs_ply_hard_labels(
+                ply_path, classifier_path, classifier_chunk_size=1
+            )
+
+        np.testing.assert_array_equal(batch.semantic_ids, [0, 1])
+        self.assertEqual(batch.semantic_source, "obj_dc_* argmax via classifier_npz")
+
     def test_transform_updates_means_and_spatial_scale(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "point_cloud.ply"
@@ -116,4 +138,3 @@ class ILGSPLYAdapterTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

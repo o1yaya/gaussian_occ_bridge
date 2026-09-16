@@ -14,5 +14,7 @@
   preserves rotated covariance extent and supports explicit reconstruction-to-robot transforms.
 - Ran the adapter on a real 18,223-Gaussian ILGS `ramen / pork belly` query export;
   published the hashed run summary, frozen filtering protocol and diagnostic figure.
+- Converted the complete 854,507-Gaussian `ramen` scene and 256-way classifier into a
+  memory-bounded hard-label semantic occupancy baseline with 47 active object IDs.
 
 Current claim level: a runnable reference baseline exists. Dataset-scale results, free-space ray supervision, dynamic reconstruction and ROS2 integration are not complete.

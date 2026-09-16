@@ -20,6 +20,17 @@ class ILGSGaussianBatch:
     semantic_source: str
 
 
+@dataclass(frozen=True)
+class ILGSHardLabelBatch:
+    means: np.ndarray
+    axis_aligned_scales: np.ndarray
+    opacities: np.ndarray
+    semantic_ids: np.ndarray
+    rotations_wxyz: np.ndarray
+    source_indices: np.ndarray
+    semantic_source: str
+
+
 def _ordered_fields(names: tuple[str, ...], prefix: str) -> list[str]:
     fields = [name for name in names if name.startswith(prefix)]
     return sorted(fields, key=lambda name: int(name.rsplit("_", 1)[-1]))
@@ -213,4 +224,68 @@ def load_ilgs_ply(
         rotations_wxyz=(rotations[source_indices] / np.linalg.norm(rotations[source_indices], axis=1, keepdims=True)).astype(np.float32),
         source_indices=source_indices.astype(np.int64),
         semantic_source=semantic_source,
+    )
+
+
+def load_ilgs_ply_hard_labels(
+    path: str | Path,
+    classifier_npz: str | Path,
+    *,
+    transform: np.ndarray | None = None,
+    min_opacity: float = 0.0,
+    max_axis_scale: float | None = None,
+    max_gaussians: int | None = None,
+    classifier_chunk_size: int = 32_768,
+) -> ILGSHardLabelBatch:
+    """Load ILGS geometry and predict one object ID per Gaussian in chunks."""
+    if classifier_chunk_size <= 0:
+        raise ValueError("classifier_chunk_size must be positive")
+    geometry = load_ilgs_ply(
+        path,
+        semantic_mode="constant",
+        transform=transform,
+        min_opacity=min_opacity,
+        max_axis_scale=max_axis_scale,
+        max_gaussians=max_gaussians,
+    )
+    ply = PlyData.read(str(Path(path)))
+    vertices = ply["vertex"].data
+    names = vertices.dtype.names or ()
+    object_fields = _ordered_fields(names, "obj_dc_")
+    if not object_fields:
+        raise ValueError("ILGS PLY does not contain obj_dc_* properties")
+    source = geometry.source_indices
+    objects = np.stack(
+        [
+            np.asarray(vertices[name], dtype=np.float32)[source]
+            for name in object_fields
+        ],
+        axis=1,
+    )
+    checkpoint = np.load(classifier_npz)
+    weight = np.asarray(checkpoint["weight"], dtype=np.float32)
+    bias = np.asarray(
+        checkpoint["bias"] if "bias" in checkpoint else np.zeros(weight.shape[0]),
+        dtype=np.float32,
+    )
+    if weight.ndim != 2 or weight.shape[1] != objects.shape[1]:
+        raise ValueError(
+            f"classifier weight must have shape [C, {objects.shape[1]}], got {weight.shape}"
+        )
+    if bias.shape != (weight.shape[0],):
+        raise ValueError(f"classifier bias must have shape {(weight.shape[0],)}")
+    semantic_ids = np.empty(len(objects), dtype=np.int32)
+    for start in range(0, len(objects), classifier_chunk_size):
+        stop = min(start + classifier_chunk_size, len(objects))
+        logits = objects[start:stop] @ weight.T + bias
+        semantic_ids[start:stop] = np.argmax(logits, axis=1).astype(np.int32)
+
+    return ILGSHardLabelBatch(
+        means=geometry.means,
+        axis_aligned_scales=geometry.axis_aligned_scales,
+        opacities=geometry.opacities,
+        semantic_ids=semantic_ids,
+        rotations_wxyz=geometry.rotations_wxyz,
+        source_indices=geometry.source_indices,
+        semantic_source="obj_dc_* argmax via classifier_npz",
     )

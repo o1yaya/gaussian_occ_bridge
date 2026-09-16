@@ -1,0 +1,213 @@
+{
+  "source_ply": "ramen_point_cloud.ply",
+  "source_file_size_bytes": 276862267,
+  "source_sha256": "8fae40798cc9f27764e6e2bf29734c569da015726ecb8b30770a5c906acd6ec8",
+  "classifier_npz": "ramen_classifier.npz",
+  "classifier_sha256": "16e448eddb928db7e818fae95ca43974def2d7a974cf4c1d041c074d36296c9b",
+  "semantic_source": "obj_dc_* argmax via classifier_npz",
+  "hard_label_rule": "strongest individual Gaussian evidence per voxel",
+  "gaussians_after_filtering_and_topk": 200000,
+  "gaussians_inside_grid": 192157,
+  "active_object_ids_in_gaussians": 47,
+  "top_object_ids_by_gaussian_count": [
+    {
+      "object_id": 1,
+      "count": 40285
+    },
+    {
+      "object_id": 0,
+      "count": 22351
+    },
+    {
+      "object_id": 108,
+      "count": 19334
+    },
+    {
+      "object_id": 99,
+      "count": 9025
+    },
+    {
+      "object_id": 29,
+      "count": 7555
+    },
+    {
+      "object_id": 176,
+      "count": 7357
+    },
+    {
+      "object_id": 119,
+      "count": 6524
+    },
+    {
+      "object_id": 113,
+      "count": 5538
+    },
+    {
+      "object_id": 129,
+      "count": 4915
+    },
+    {
+      "object_id": 27,
+      "count": 4330
+    },
+    {
+      "object_id": 196,
+      "count": 4071
+    },
+    {
+      "object_id": 15,
+      "count": 3912
+    },
+    {
+      "object_id": 149,
+      "count": 3762
+    },
+    {
+      "object_id": 111,
+      "count": 3495
+    },
+    {
+      "object_id": 75,
+      "count": 3344
+    },
+    {
+      "object_id": 28,
+      "count": 3223
+    },
+    {
+      "object_id": 122,
+      "count": 3210
+    },
+    {
+      "object_id": 212,
+      "count": 3134
+    },
+    {
+      "object_id": 5,
+      "count": 2954
+    },
+    {
+      "object_id": 2,
+      "count": 2468
+    }
+  ],
+  "active_object_ids_in_bev": 47,
+  "top_object_ids_by_bev_cell_count": [
+    {
+      "object_id": 99,
+      "count": 9523
+    },
+    {
+      "object_id": 0,
+      "count": 8949
+    },
+    {
+      "object_id": 1,
+      "count": 6244
+    },
+    {
+      "object_id": 196,
+      "count": 2516
+    },
+    {
+      "object_id": 129,
+      "count": 719
+    },
+    {
+      "object_id": 12,
+      "count": 713
+    },
+    {
+      "object_id": 37,
+      "count": 675
+    },
+    {
+      "object_id": 27,
+      "count": 600
+    },
+    {
+      "object_id": 108,
+      "count": 506
+    },
+    {
+      "object_id": 158,
+      "count": 482
+    },
+    {
+      "object_id": 15,
+      "count": 473
+    },
+    {
+      "object_id": 54,
+      "count": 380
+    },
+    {
+      "object_id": 75,
+      "count": 322
+    },
+    {
+      "object_id": 111,
+      "count": 313
+    },
+    {
+      "object_id": 5,
+      "count": 305
+    },
+    {
+      "object_id": 122,
+      "count": 285
+    },
+    {
+      "object_id": 57,
+      "count": 269
+    },
+    {
+      "object_id": 62,
+      "count": 242
+    },
+    {
+      "object_id": 176,
+      "count": 216
+    },
+    {
+      "object_id": 136,
+      "count": 199
+    }
+  ],
+  "min_opacity": 0.1,
+  "max_axis_scale": 0.2,
+  "max_gaussians": 200000,
+  "auto_grid_crop_quantile": 0.01,
+  "radius_sigma": 3.0,
+  "unknown_evidence_threshold": 0.001,
+  "grid_min": [
+    -7.2,
+    -4.9,
+    -12.3
+  ],
+  "grid_max": [
+    15.9,
+    25.400000000000002,
+    9.4
+  ],
+  "voxel_size": [
+    0.1,
+    0.1,
+    0.1
+  ],
+  "grid_shape_xyz": [
+    231,
+    303,
+    217
+  ],
+  "voxel_count": 15188481,
+  "occupied_voxels_at_0_5": 84665,
+  "known_voxels": 628404,
+  "bev_known_cells": 36196,
+  "load_and_classify_seconds": 2.282240099972114,
+  "splat_and_reduce_seconds": 10.858323100022972,
+  "coordinate_note": "Reconstruction coordinates; axis 2 is not verified gravity.",
+  "semantic_note": "Object IDs are classifier indices, not human-readable categories.",
+  "free_space_note": "Cells without Gaussian evidence remain unknown, not free.",
+  "output": "outputs/ramen_full_semantic/semantic_occupancy.npz"
+}

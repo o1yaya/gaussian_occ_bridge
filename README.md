@@ -26,6 +26,31 @@ The current NumPy implementation uses diagonal covariance, local `3σ` support, 
 
 ## Visible result
 
+### Full-scene object-ID semantic occupancy
+
+The complete ILGS `ramen` PLY contains 854,507 Gaussians and a 256-way object
+classifier. A memory-bounded CPU run keeps the 200,000 highest-opacity Gaussians after
+scale/opacity filtering and produces hard-label semantic occupancy for 47 active object IDs:
+
+![Full-scene semantic occupancy](docs/assets/ramen_full_semantic_bev.png)
+
+| Item | Result |
+|---|---:|
+| Source Gaussians | 854,507 |
+| Bounded run budget | 200,000 |
+| Gaussian centers inside robust grid | 192,157 |
+| Active classifier object IDs | 47 |
+| Voxel grid | 231 × 303 × 217 |
+| Total voxels | 15,188,481 |
+| Load and classify | 2.28 s |
+| CPU splat and BEV reduction | 10.86 s |
+
+To avoid a dense `[X,Y,Z,256]` tensor, each voxel receives the object ID of the
+individual Gaussian with the strongest local evidence. Occupancy still uses probabilistic
+union. This is a memory-efficient reference baseline, not equivalent to full per-class
+evidence accumulation. See
+[`docs/full_scene_semantic_result.md`](docs/full_scene_semantic_result.md).
+
 ### Real ILGS query export
 
 The adapter was run on an 18,223-Gaussian `pork belly` query export from the ILGS
@@ -112,7 +137,7 @@ PowerShell users can also run the source directly with `$env:PYTHONPATH="src"` i
 - Evidence-weighted semantic aggregation.
 - Explicit unknown-space mask.
 - 3D-to-BEV height reduction.
-- Eight deterministic unit tests, synthetic artifact export and visualization.
+- Eleven deterministic unit tests, synthetic artifact export and visualization.
 - GitHub Actions test workflow.
 - Real ILGS/GraphDECO PLY adapter with parameter activation, rotated-covariance handling,
   optional object-classifier semantics and calibrated affine transforms.
@@ -124,6 +149,7 @@ PowerShell users can also run the source directly with `$env:PYTHONPATH="src"` i
 | NumPy CPU reference | Completed |
 | Unit tests and synthetic demo | Completed |
 | ILGS PLY to voxel/BEV adapter | Completed |
+| Full-scene hard-label object-ID occupancy | Completed reference baseline |
 | Rotation-aware full covariance | Planned |
 | PyTorch/autograd implementation | Planned |
 | Camera-ray free-space supervision | Planned |
