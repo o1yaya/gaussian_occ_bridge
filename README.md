@@ -90,8 +90,10 @@ PowerShell users can also run the source directly with `$env:PYTHONPATH="src"` i
 - Evidence-weighted semantic aggregation.
 - Explicit unknown-space mask.
 - 3D-to-BEV height reduction.
-- Deterministic unit tests, synthetic artifact export and visualization.
+- Eight deterministic unit tests, synthetic artifact export and visualization.
 - GitHub Actions test workflow.
+- Real ILGS/GraphDECO PLY adapter with parameter activation, rotated-covariance handling,
+  optional object-classifier semantics and calibrated affine transforms.
 
 ## Honest project status
 
@@ -99,6 +101,7 @@ PowerShell users can also run the source directly with `$env:PYTHONPATH="src"` i
 |---|---|
 | NumPy CPU reference | Completed |
 | Unit tests and synthetic demo | Completed |
+| ILGS PLY to voxel/BEV adapter | Completed |
 | Rotation-aware full covariance | Planned |
 | PyTorch/autograd implementation | Planned |
 | Camera-ray free-space supervision | Planned |
@@ -116,3 +119,20 @@ This supports the resume claim **“implemented a Gaussian-to-voxel reference ba
 5. Add a ROS2 `nav_msgs/OccupancyGrid` adapter and simulation smoke test.
 
 The frozen experiment protocol is in [`docs/experiment_plan.md`](docs/experiment_plan.md), and progress boundaries are tracked in [`docs/status.md`](docs/status.md).
+
+## Run on an ILGS export
+
+For a query-isolated `target_gaussians_full.ply`:
+
+```bash
+python scripts/run_ilgs_ply.py \
+  --ply /path/to/target_gaussians_full.ply \
+  --semantic-mode constant \
+  --voxel-size 0.05 0.05 0.05 \
+  --output-dir outputs/query_target
+```
+
+The loader applies ILGS-compatible `exp(scale)`, `sigmoid(opacity)` and scalar-first
+quaternion normalization before voxelization. See
+[`docs/ilgs_adapter.md`](docs/ilgs_adapter.md) for object-classifier semantics, coordinate
+transforms, memory guards and representation limitations.

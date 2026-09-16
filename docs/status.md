@@ -10,5 +10,7 @@
 - Added a reproducible BEV visualization and machine-readable demo summary.
 - Added a bilingual, recruiter-facing README with explicit claim boundaries.
 - Added GitHub Actions CI for tests and the synthetic smoke test.
+- Added an ILGS PLY adapter that activates stored scale/opacity/quaternion parameters,
+  preserves rotated covariance extent and supports explicit reconstruction-to-robot transforms.
 
 Current claim level: a runnable reference baseline exists. Dataset-scale results, free-space ray supervision, dynamic reconstruction and ROS2 integration are not complete.
