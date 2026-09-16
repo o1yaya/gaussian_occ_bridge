@@ -1,0 +1,44 @@
+experiment:
+  name: indoor_cpu_reference_v0
+  seed: 42
+  status: in_progress
+
+coordinates:
+  source_frame: reconstruction
+  target_frame: local_workspace
+  metric_scale_required: true
+  axis_convention: xyz
+
+grid:
+  min_xyz: [-4.0, -4.0, -1.0]
+  max_xyz: [4.0, 4.0, 3.0]
+  voxel_size_xyz: [0.10, 0.10, 0.10]
+  array_order: xyz
+
+splat:
+  covariance: diagonal_reference
+  radius_sigma: 3.0
+  opacity_clip: [0.0, 0.999999]
+  occupancy_rule: probabilistic_union
+  semantic_rule: evidence_weighted_softmax
+  unknown_evidence_threshold: 0.001
+
+free_space:
+  mode: unknown_without_rays
+  future_source: calibrated_depth_or_camera_rays
+
+bev:
+  height_axis: z
+  occupancy_rule: probabilistic_union
+  semantic_rule: evidence_weighted_sum
+
+evaluation:
+  geometry_metrics: [occupied_iou, free_iou, unknown_rate]
+  semantic_metrics: [miou, per_class_iou]
+  efficiency_metrics: [latency_ms, peak_memory_mb, gaussian_count]
+  report_coordinate_failures: true
+
+dataset:
+  phase_0: synthetic_unit_tests
+  phase_1: ilgs_static_scene_export
+  phase_2: public_multicamera_subset
