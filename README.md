@@ -26,9 +26,31 @@ The current NumPy implementation uses diagonal covariance, local `3σ` support, 
 
 ## Visible result
 
-![Synthetic BEV result](docs/assets/synthetic_bev_demo.png)
+### Real ILGS query export
 
-Deterministic synthetic smoke test:
+The adapter was run on an 18,223-Gaussian `pork belly` query export from the ILGS
+`ramen` scene. The figure shows occupancy evidence in **reconstruction coordinates**:
+
+![Real ILGS pork belly occupancy](docs/assets/ramen_pork_belly_real_bev.png)
+
+| Item | Result |
+|---|---:|
+| Source Gaussians | 18,223 |
+| After opacity/scale filtering | 14,919 |
+| Gaussian centers inside robust grid | 14,726 |
+| Voxel grid | 85 × 73 × 67 |
+| Occupied voxels (`p ≥ 0.5`) | 44,097 |
+| Voxels with Gaussian evidence | 183,918 |
+| BEV cells with evidence | 5,574 |
+
+Probabilistic union saturates in dense regions, as visible in the upper-right panel. This
+is occupancy **evidence**, not a calibrated OCC probability or navigation-ready map. See
+[`docs/real_ilgs_result.md`](docs/real_ilgs_result.md) for the frozen filtering protocol,
+input hash and limitations.
+
+### Deterministic synthetic smoke test
+
+![Synthetic BEV result](docs/assets/synthetic_bev_demo.png)
 
 | Item | Result |
 |---|---:|

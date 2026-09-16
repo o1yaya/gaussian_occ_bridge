@@ -1,0 +1,41 @@
+{
+  "source_ply": "target.ply",
+  "source_file_size_bytes": 5906250,
+  "source_sha256": "6964e0eb137c243c807c19cfb1956cae72249d4e06c5f631a6c25e9b936defa0",
+  "gaussians_after_filtering": 14919,
+  "gaussians_inside_grid": 14726,
+  "semantic_source": "constant-target-class",
+  "min_opacity": 0.05,
+  "max_axis_scale": 0.2,
+  "auto_grid_crop_quantile": 0.01,
+  "radius_sigma": 3.0,
+  "unknown_evidence_threshold": 0.001,
+  "grid_min": [
+    -0.8,
+    0.98,
+    1.6600000000000001
+  ],
+  "grid_max": [
+    0.9,
+    2.44,
+    3.0
+  ],
+  "voxel_size": [
+    0.02,
+    0.02,
+    0.02
+  ],
+  "grid_shape_xyz": [
+    85,
+    73,
+    67
+  ],
+  "voxel_count": 415735,
+  "occupied_voxels_at_0_5": 44097,
+  "known_voxels": 183918,
+  "bev_known_cells": 5574,
+  "max_occupancy": 1.0,
+  "coordinate_note": "Metric meaning depends on the supplied transform. Without --transform-json, the output remains in ILGS reconstruction coordinates.",
+  "free_space_note": "Cells without Gaussian evidence remain unknown, not free.",
+  "output": "outputs/ramen_pork_belly_real/ilgs_occupancy.npz"
+}
