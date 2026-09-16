@@ -1,0 +1,13 @@
+{
+  "grid_shape_xyz": [
+    40,
+    40,
+    30
+  ],
+  "gaussian_count": 2,
+  "occupied_voxels_at_0_5": 649,
+  "known_voxels": 18712,
+  "bev_known_cells": 834,
+  "max_occupancy": 0.8988781571388245,
+  "output": "outputs/synthetic_demo.npz"
+}

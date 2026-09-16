@@ -29,6 +29,7 @@ def main() -> None:
     output_dir = ROOT / "outputs"
     output_dir.mkdir(parents=True, exist_ok=True)
     output_path = output_dir / "synthetic_demo.npz"
+    summary_path = output_dir / "synthetic_demo_summary.json"
     np.savez_compressed(
         output_path,
         occupancy=voxels.occupancy,
@@ -46,8 +47,9 @@ def main() -> None:
         "known_voxels": int((~voxels.unknown_mask).sum()),
         "bev_known_cells": int((~bev.unknown_mask).sum()),
         "max_occupancy": float(voxels.occupancy.max()),
-        "output": str(output_path),
+        "output": output_path.relative_to(ROOT).as_posix(),
     }
+    summary_path.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(summary, indent=2))
 
 
