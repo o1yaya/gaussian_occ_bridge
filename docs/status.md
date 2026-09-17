@@ -23,10 +23,10 @@ Current claim level: a runnable reference baseline exists. Dataset-scale results
 
 ## 2026-09-17
 
-- Completed ILGS query-mask exports for six `ramen` language queries; five pass the
-  mask/overlay quality gate and map to 12 non-overlapping classifier object IDs.
-- Projected the accepted IDs through the bounded full-scene hard-label BEV; all are visible
-  and together cover 1,945 of 36,196 cells with evidence.
+- Completed ILGS query-mask exports for six `ramen` language queries. `pork belly` passes a
+  four-view overlay review, four mappings are pending review and `chopsticks` is rejected.
+- Projected the currently accepted IDs through the bounded full-scene hard-label BEV; the
+  two `pork belly` IDs cover 48 of 36,196 cells with evidence.
 - Added a reproducible three-panel named-query visualization and machine-readable summary.
 - Flagged `chopsticks` as a diagnostic result because its 213,370-Gaussian export and
   7,152-cell footprint are unusually broad and may contain background leakage.
@@ -34,8 +34,12 @@ Current claim level: a runnable reference baseline exists. Dataset-scale results
   matches its mapped-ID membership exactly. For `chopsticks`, ID 1 contributes 169,409
   Gaussians (79.40%). A no-ID-1 rerun was also rejected after the overlay review: one failed
   view dominates 95.39% of all mask pixels and the retained IDs highlight unrelated objects.
+- Added a reusable automatic gate for dominant-view share, retained vote coverage and
+  cross-view ID support, with four deterministic tests. Non-rejected queries still require
+  human overlay review before acceptance.
 
 Current claim level: the repository demonstrates a reproducible, quality-gated
-open-vocabulary query-to-object-ID-to-BEV bridge with five accepted queries and one
-documented rejection. It still does not provide metric robot-frame coordinates, free-space
-supervision, semantic OCC ground truth, dynamic reconstruction or ROS2 closure.
+open-vocabulary query-to-object-ID-to-BEV bridge with one accepted query, four pending
+reviews and one documented rejection. It still does not provide metric robot-frame
+coordinates, free-space supervision, semantic OCC ground truth, dynamic reconstruction or
+ROS2 closure.

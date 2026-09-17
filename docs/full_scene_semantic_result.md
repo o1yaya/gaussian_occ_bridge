@@ -104,10 +104,10 @@ semantic BEV, these IDs account for 48 labeled cells (31 from ID 212 and 17 from
 
 ![Pork belly query bridge](assets/ramen_pork_belly_query_bev.png)
 
-The same export procedure was subsequently run for the other five ramen queries. After a
-mask/overlay quality gate, five queries with 12 non-overlapping object IDs are accepted and
-all appear in the bounded full-scene BEV. They cover 1,945 of 36,196 cells with evidence.
-The named result and exact per-query counts are documented in
+The same export procedure was subsequently run for the other five ramen queries. Under the
+mask/overlay quality gate, `pork belly` is currently accepted, four mappings remain pending
+and `chopsticks` is rejected. The two accepted IDs cover 48 of 36,196 cells with evidence.
+The named result and exact per-query status are documented in
 [`ramen_named_query_bev.md`](ramen_named_query_bev.md).
 
 The `chopsticks` result is rejected: one view contributes 95.39% of all query-mask pixels

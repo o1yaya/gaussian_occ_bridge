@@ -54,23 +54,24 @@ evidence accumulation. See
 ### Open-vocabulary query bridge
 
 Six language queries were processed by ILGS multi-view query-mask voting and isolated
-Gaussian export. A mask/overlay quality gate accepts five queries mapped to 12 classifier
-object IDs and rejects `chopsticks` before projection onto the bounded full-scene BEV:
+Gaussian export. The quality gate currently accepts `pork belly`, keeps four mappings
+pending their overlay review, and rejects `chopsticks` before named-BEV publication:
 
 ![Named query mapping](docs/assets/ramen_named_query_bev.png)
 
-| Accepted query | Object IDs | Query-export Gaussians | BEV cells |
-|---|---|---:|---:|
-| egg | 107, 109, 123, 238 | 14,529 | 95 |
-| glass of water | 53, 75, 129, 141 | 57,004 | 1,268 |
-| pork belly | 120, 212 | 18,223 | 48 |
-| wavy noodles in bowl | 28 | 9,563 | 28 |
-| yellow bowl | 108 | 51,582 | 506 |
+| Query | Object IDs | Query-export Gaussians | Gate status |
+|---|---|---:|---|
+| egg | 107, 109, 123, 238 | 14,529 | pending overlay review |
+| glass of water | 53, 75, 129, 141 | 57,004 | pending overlay review |
+| pork belly | 120, 212 | 18,223 | accepted |
+| wavy noodles in bowl | 28 | 9,563 | pending overlay review |
+| yellow bowl | 108 | 51,582 | pending overlay review |
+| chopsticks | candidate IDs rejected | 213,370 | rejected |
 
-The 12 accepted assignments do not overlap and all are visible in this 200k-Gaussian run.
-Together they cover 1,945 of 36,196 BEV cells with evidence (5.37%). These are
-query-grounded ID mappings, not a trained human-category classifier or semantic OCC
-accuracy result. See
+The accepted `pork belly` IDs cover 48 of 36,196 BEV cells with evidence. Four other
+non-overlapping candidate mappings are recorded but deliberately withheld from this figure
+until the same automatic and visual review is complete. These are query-grounded ID
+mappings, not a trained human-category classifier or semantic OCC accuracy result. See
 [`docs/ramen_named_query_bev.md`](docs/ramen_named_query_bev.md).
 
 `chopsticks` is rejected rather than merely hidden: one view supplies 175,751 pixels, or
@@ -164,7 +165,7 @@ PowerShell users can also run the source directly with `$env:PYTHONPATH="src"` i
 - Evidence-weighted semantic aggregation.
 - Explicit unknown-space mask.
 - 3D-to-BEV height reduction.
-- Eleven deterministic unit tests, synthetic artifact export and visualization.
+- Fifteen deterministic unit tests, synthetic artifact export and visualization.
 - GitHub Actions test workflow.
 - Real ILGS/GraphDECO PLY adapter with parameter activation, rotated-covariance handling,
   optional object-classifier semantics and calibrated affine transforms.
@@ -177,7 +178,8 @@ PowerShell users can also run the source directly with `$env:PYTHONPATH="src"` i
 | Unit tests and synthetic demo | Completed |
 | ILGS PLY to voxel/BEV adapter | Completed |
 | Full-scene hard-label object-ID occupancy | Completed reference baseline |
-| Quality-gated open-vocabulary ID-to-BEV bridge | Five accepted queries; one rejected audit |
+| Quality-gated open-vocabulary ID-to-BEV bridge | One accepted, four pending, one rejected |
+| Automatic mask-vote quality gate | Completed; four deterministic tests |
 | Rotation-aware full covariance | Planned |
 | PyTorch/autograd implementation | Planned |
 | Camera-ray free-space supervision | Planned |

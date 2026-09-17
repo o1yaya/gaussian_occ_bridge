@@ -1,0 +1,11 @@
+{
+  "scene": "ramen",
+  "query": "pork belly",
+  "object_ids": [120, 212],
+  "usable_view_count": 4,
+  "visual_decision": "accept",
+  "visual_finding": "Across all four views, the cyan query mask and orange selected-ID overlay consistently localize the pork-belly slices with close boundaries and no obvious remote-object activation.",
+  "evidence_archive": "pork_belly_mask_vote_vis.zip",
+  "evidence_archive_sha256": "611ea2238f22bd420be9908ae063f342bfd13c8981a042193c8917cb790abd3d",
+  "interpretation": "This accepts the query-to-object-ID mapping for integration evidence. It is not a semantic OCC ground-truth accuracy measurement."
+}

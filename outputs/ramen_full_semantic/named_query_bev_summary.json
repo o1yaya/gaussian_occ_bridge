@@ -2,8 +2,60 @@
   "scene": "ramen",
   "mapping_method": "ILGS multi-view query-mask voting and isolated Gaussian export",
   "configured_query_count": 6,
-  "accepted_query_count": 5,
-  "excluded_queries": [
+  "accepted_query_count": 1,
+  "withheld_queries": [
+    {
+      "query": "chopsticks",
+      "status": "rejected-after-mask-overlay-review",
+      "object_ids": [
+        1,
+        15,
+        57,
+        112,
+        119
+      ],
+      "quality_note": "Rejected: view 3 contributes 95.39% of all query-mask pixels and covers broad table/background regions; removing ID 1 does not yield stable chopstick localization in the remaining overlays."
+    },
+    {
+      "query": "egg",
+      "status": "pending-overlay-review",
+      "object_ids": [
+        107,
+        109,
+        123,
+        238
+      ],
+      "quality_note": ""
+    },
+    {
+      "query": "glass of water",
+      "status": "pending-overlay-review",
+      "object_ids": [
+        53,
+        75,
+        129,
+        141
+      ],
+      "quality_note": ""
+    },
+    {
+      "query": "wavy noodles in bowl",
+      "status": "pending-overlay-review",
+      "object_ids": [
+        28
+      ],
+      "quality_note": ""
+    },
+    {
+      "query": "yellow bowl",
+      "status": "pending-overlay-review",
+      "object_ids": [
+        108
+      ],
+      "quality_note": ""
+    }
+  ],
+  "rejected_queries": [
     {
       "query": "chopsticks",
       "status": "rejected-after-mask-overlay-review",
@@ -17,67 +69,55 @@
       "quality_note": "Rejected: view 3 contributes 95.39% of all query-mask pixels and covers broad table/background regions; removing ID 1 does not yield stable chopstick localization in the remaining overlays."
     }
   ],
-  "configured_object_id_count": 12,
+  "pending_queries": [
+    {
+      "query": "egg",
+      "status": "pending-overlay-review",
+      "object_ids": [
+        107,
+        109,
+        123,
+        238
+      ],
+      "quality_note": ""
+    },
+    {
+      "query": "glass of water",
+      "status": "pending-overlay-review",
+      "object_ids": [
+        53,
+        75,
+        129,
+        141
+      ],
+      "quality_note": ""
+    },
+    {
+      "query": "wavy noodles in bowl",
+      "status": "pending-overlay-review",
+      "object_ids": [
+        28
+      ],
+      "quality_note": ""
+    },
+    {
+      "query": "yellow bowl",
+      "status": "pending-overlay-review",
+      "object_ids": [
+        108
+      ],
+      "quality_note": ""
+    }
+  ],
+  "configured_object_id_count": 2,
   "overlapping_object_id_assignments": [],
   "bounded_full_scene_bev_known_cells": 36196,
-  "mapped_bev_cells": 1945,
-  "mapped_fraction_of_known_bev": 0.05373521936125539,
+  "mapped_bev_cells": 48,
+  "mapped_fraction_of_known_bev": 0.0013261133826942204,
   "coordinate_note": "Mappings name classifier object IDs only; BEV axes remain reconstruction axes.",
   "unknown_space_note": "Cells without Gaussian evidence are unknown, not free.",
   "hard_label_note": "Each BEV cell carries the strongest height-wise voxel label from the memory-bounded hard-label baseline.",
   "queries": {
-    "egg": {
-      "configured_object_ids": [
-        107,
-        109,
-        123,
-        238
-      ],
-      "object_ids_visible_in_bounded_bev": [
-        107,
-        109,
-        123,
-        238
-      ],
-      "object_ids_absent_from_bounded_bev": [],
-      "bev_cells": 95,
-      "bev_cells_at_occupancy_ge_0_5": 85,
-      "bev_cells_by_object_id": {
-        "107": 37,
-        "109": 53,
-        "123": 2,
-        "238": 3
-      },
-      "selected_gaussians_in_query_export": 14529,
-      "usable_view_count": 4,
-      "status": "mapped-from-mask-vote-export"
-    },
-    "glass of water": {
-      "configured_object_ids": [
-        53,
-        75,
-        129,
-        141
-      ],
-      "object_ids_visible_in_bounded_bev": [
-        53,
-        75,
-        129,
-        141
-      ],
-      "object_ids_absent_from_bounded_bev": [],
-      "bev_cells": 1268,
-      "bev_cells_at_occupancy_ge_0_5": 1047,
-      "bev_cells_by_object_id": {
-        "53": 87,
-        "75": 322,
-        "129": 719,
-        "141": 140
-      },
-      "selected_gaussians_in_query_export": 57004,
-      "usable_view_count": 4,
-      "status": "mapped-from-mask-vote-export"
-    },
     "pork belly": {
       "configured_object_ids": [
         120,
@@ -96,41 +136,7 @@
       },
       "selected_gaussians_in_query_export": 18223,
       "usable_view_count": 4,
-      "status": "mapped-from-mask-vote-export-and-verified-locally"
-    },
-    "wavy noodles in bowl": {
-      "configured_object_ids": [
-        28
-      ],
-      "object_ids_visible_in_bounded_bev": [
-        28
-      ],
-      "object_ids_absent_from_bounded_bev": [],
-      "bev_cells": 28,
-      "bev_cells_at_occupancy_ge_0_5": 26,
-      "bev_cells_by_object_id": {
-        "28": 28
-      },
-      "selected_gaussians_in_query_export": 9563,
-      "usable_view_count": 4,
-      "status": "mapped-from-mask-vote-export"
-    },
-    "yellow bowl": {
-      "configured_object_ids": [
-        108
-      ],
-      "object_ids_visible_in_bounded_bev": [
-        108
-      ],
-      "object_ids_absent_from_bounded_bev": [],
-      "bev_cells": 506,
-      "bev_cells_at_occupancy_ge_0_5": 445,
-      "bev_cells_by_object_id": {
-        "108": 506
-      },
-      "selected_gaussians_in_query_export": 51582,
-      "usable_view_count": 4,
-      "status": "mapped-from-mask-vote-export"
+      "status": "accepted-after-four-view-overlay-review"
     }
   }
 }

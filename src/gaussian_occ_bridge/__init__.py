@@ -14,6 +14,7 @@ from .io_ilgs import (
     quaternion_wxyz_to_matrix,
 )
 from .splat import VoxelSplatResult, gaussian_to_voxels, reduce_to_bev
+from .query_quality import audit_mask_vote_summary
 
 __all__ = [
     "VoxelGridSpec",
@@ -28,4 +29,5 @@ __all__ = [
     "quaternion_wxyz_to_matrix",
     "reduce_to_bev",
     "reduce_hard_labels_to_bev",
+    "audit_mask_vote_summary",
 ]

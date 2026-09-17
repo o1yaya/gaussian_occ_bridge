@@ -1,0 +1,80 @@
+{
+  "query": "chopsticks",
+  "source_summary": "mask_vote_summary.json",
+  "automatic_decision": "reject",
+  "reject_reasons": [
+    "one view dominates the aggregate query mask",
+    "too few query-mask pixels retain object-ID votes"
+  ],
+  "warnings": [
+    "some selected object IDs have weak cross-view support"
+  ],
+  "usable_view_count": 4,
+  "total_mask_pixels": 184238,
+  "voted_mask_pixels": 37870,
+  "vote_coverage": 0.20554934378358428,
+  "dominant_view": {
+    "index": 3,
+    "mask_pixels": 175751,
+    "mask_share": 0.9539345846133805
+  },
+  "views": [
+    {
+      "index": 0,
+      "mask_pixels": 1239,
+      "mask_share": 0.0067249970147309455
+    },
+    {
+      "index": 1,
+      "mask_pixels": 101,
+      "mask_share": 0.0005482039535817801
+    },
+    {
+      "index": 2,
+      "mask_pixels": 7147,
+      "mask_share": 0.038792214418306756
+    },
+    {
+      "index": 3,
+      "mask_pixels": 175751,
+      "mask_share": 0.9539345846133805
+    }
+  ],
+  "selected_ids": [
+    57,
+    119,
+    15,
+    112
+  ],
+  "selected_id_view_support": {
+    "57": [
+      3
+    ],
+    "119": [
+      0,
+      1,
+      2
+    ],
+    "15": [
+      3
+    ],
+    "112": [
+      3
+    ]
+  },
+  "under_supported_selected_ids": [
+    57,
+    15,
+    112
+  ],
+  "thresholds": {
+    "reject_dominant_view_share": 0.9,
+    "warn_dominant_view_share": 0.75,
+    "reject_min_vote_coverage": 0.5,
+    "warn_min_cross_view_support": 2
+  },
+  "interpretation": "Automatic checks detect degenerate vote distributions only. A non-rejected result still requires visual review before semantic acceptance.",
+  "visual_decision": "reject",
+  "visual_note": "View 3 covers broad table/background; retained overlays highlight unrelated cups and a distant noodle plate.",
+  "final_decision": "reject"
+}

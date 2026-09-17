@@ -46,7 +46,7 @@ def main() -> None:
         for query, info in configured_queries
         if info.get("include_in_named_bev", True)
     ]
-    excluded_queries = [
+    withheld_queries = [
         {
             "query": query,
             "status": info["status"],
@@ -55,6 +55,12 @@ def main() -> None:
         }
         for query, info in configured_queries
         if not info.get("include_in_named_bev", True)
+    ]
+    rejected_queries = [
+        row for row in withheld_queries if str(row["status"]).startswith("rejected")
+    ]
+    pending_queries = [
+        row for row in withheld_queries if str(row["status"]).startswith("pending")
     ]
     named = np.full(labels.shape, -1, dtype=np.int16)
     owner_by_id: dict[int, str] = {}
@@ -110,7 +116,9 @@ def main() -> None:
         "mapping_method": mapping["mapping_method"],
         "configured_query_count": len(configured_queries),
         "accepted_query_count": len(queries),
-        "excluded_queries": excluded_queries,
+        "withheld_queries": withheld_queries,
+        "rejected_queries": rejected_queries,
+        "pending_queries": pending_queries,
         "configured_object_id_count": len(owner_by_id),
         "overlapping_object_id_assignments": overlaps,
         "bounded_full_scene_bev_known_cells": known_cells,

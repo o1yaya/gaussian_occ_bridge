@@ -3,9 +3,9 @@
 ## Purpose
 
 This experiment processes six human-readable text queries with ILGS multi-view query-mask
-voting. Five pass a mask/overlay quality gate and are connected to classifier object IDs in
-the memory-bounded full-scene BEV; `chopsticks` is rejected. The experiment does not
-reinterpret all 256 classifier indices as human semantic classes.
+voting. `pork belly` has passed a four-view overlay review, four mappings await the same
+review, and `chopsticks` is rejected. Only accepted mappings appear in the named BEV. The
+experiment does not reinterpret all 256 classifier indices as human semantic classes.
 
 ## Reproduce
 
@@ -26,21 +26,20 @@ versioned.
 
 | Accepted query | Object IDs | Export Gaussians | Usable views | BEV cells | Cells at occupancy ≥ 0.5 |
 |---|---|---:|---:|---:|---:|
-| egg | 107, 109, 123, 238 | 14,529 | 4 | 95 | 85 |
-| glass of water | 53, 75, 129, 141 | 57,004 | 4 | 1,268 | 1,047 |
 | pork belly | 120, 212 | 18,223 | 4 | 48 | 47 |
-| wavy noodles in bowl | 28 | 9,563 | 4 | 28 | 26 |
-| yellow bowl | 108 | 51,582 | 4 | 506 | 445 |
 
-All 12 accepted IDs are visible in the bounded 200,000-Gaussian run and no ID is assigned
-to more than one accepted query. The five mappings cover 1,945 cells, or 5.37% of the
-36,196 BEV cells with Gaussian evidence.
+The two accepted IDs are visible in the bounded 200,000-Gaussian run and cover 48 of the
+36,196 BEV cells with Gaussian evidence. The four pending candidates are `egg`, `glass of
+water`, `wavy noodles in bowl` and `yellow bowl`; their IDs are withheld from the accepted
+figure until their mask-vote summaries and overlays are reviewed.
 
 ![Quality-gated named BEV](assets/ramen_named_query_bev.png)
 
 ## Interpretation boundaries
 
 - `chopsticks` is excluded because its masks and overlays fail the quality review below.
+- A candidate export is not considered accepted merely because its IDs are non-overlapping
+  or its Gaussian count is plausible; both automatic statistics and overlays are required.
 - A mapping means the query-mask export selected those object IDs; it is not a semantic OCC
   ground-truth label and does not establish per-class IoU or mIoU.
 - The full-scene baseline keeps the top 200,000 Gaussians after filtering and uses the
@@ -99,3 +98,13 @@ python export_query_gaussians.py \
 
 This rerun produced `mask_vote_summary.json` and four
 `mask_vote_vis/*_rgb_query_selected.png` overlays used for the rejection decision.
+
+## Reusable automatic gate
+
+`scripts/audit_mask_vote_quality.py` checks dominant-view share, retained vote coverage and
+cross-view ID support. It can automatically reject a degenerate distribution, but it never
+automatically accepts semantics: non-rejected results remain `needs-visual-review` until the
+overlays are inspected. The `chopsticks` rerun triggers two rejection rules (95.39% dominant
+view share and only 20.55% retained vote coverage) plus a weak cross-view-support warning.
+The default thresholds are diagnostic engineering gates, not learned confidence calibration
+or benchmark-derived semantic accuracy thresholds.
