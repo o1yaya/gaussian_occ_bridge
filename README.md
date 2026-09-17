@@ -190,7 +190,7 @@ This supports the resume claim **“implemented a Gaussian-to-voxel reference ba
 
 ## Next engineering steps
 
-1. Audit the oversized `chopsticks` query masks and repeat the export.
+1. Validate the query-quality thresholds on additional scenes and held-out language queries.
 2. Define metric reconstruction-to-robot coordinates.
 3. Add quaternion/full-covariance projection and PyTorch gradient checks.
 4. Introduce camera-ray free/occupied/unknown supervision and public-data evaluation.
