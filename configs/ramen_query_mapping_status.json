@@ -4,11 +4,12 @@
   "coordinate_note": "Mappings name classifier object IDs only; BEV axes remain reconstruction axes.",
   "queries": {
     "chopsticks": {
-      "status": "mapped-with-diagnostic-warning",
+      "status": "rejected-after-mask-overlay-review",
+      "include_in_named_bev": false,
       "object_ids": [1, 15, 57, 112, 119],
       "selected_gaussians": 213370,
       "usable_view_count": 4,
-      "quality_note": "The unusually large query subset may include background or adjacent regions; verify masks before treating this as a clean category mapping."
+      "quality_note": "Rejected: view 3 contributes 95.39% of all query-mask pixels and covers broad table/background regions; removing ID 1 does not yield stable chopstick localization in the remaining overlays."
     },
     "egg": {
       "status": "mapped-from-mask-vote-export",

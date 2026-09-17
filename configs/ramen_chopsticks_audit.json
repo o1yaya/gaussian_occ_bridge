@@ -1,7 +1,7 @@
 {
   "scene": "ramen",
   "query": "chopsticks",
-  "audit_status": "requires-source-mask-review",
+  "audit_status": "rejected-after-source-mask-review",
   "original_object_ids": [1, 15, 57, 112, 119],
   "original_selected_gaussians": 213370,
   "full_scene_fraction": 0.24969953435138623,
@@ -15,8 +15,21 @@
     "expected_gaussians_if_votes_are_unchanged": 43961,
     "expected_full_scene_fraction_if_votes_are_unchanged": 0.051446038475986736,
     "expected_bounded_bev_cells_if_votes_are_unchanged": 908,
-    "expected_known_bev_cell_fraction_if_votes_are_unchanged": 0.025085644822632334
+    "expected_known_bev_cell_fraction_if_votes_are_unchanged": 0.025085644822632334,
+    "observed_object_ids": [15, 57, 112, 119],
+    "observed_gaussians": 43961,
+    "outcome": "rejected"
   },
-  "decision_rule": "Do not replace the original mapping solely from these size statistics. Accept the no-ID-1 candidate only if the per-view query mask and selected-ID overlays localize the physical chopsticks consistently.",
+  "mask_overlay_review": {
+    "total_mask_pixels": 184238,
+    "view_mask_pixels": [1239, 101, 7147, 175751],
+    "view_3_fraction_of_all_mask_pixels": 0.9539345846133805,
+    "view_3_mask_fraction_of_image": 0.24309953953128738,
+    "ids_appearing_only_in_view_3": [15, 57, 112],
+    "id_119_views": [0, 1, 2],
+    "visual_finding": "View 3 query mask covers broad table/background. The retained selected-ID overlays also highlight unrelated cups and a distant noodle plate rather than consistently localizing the main-scene chopsticks.",
+    "archive_sha256": "8e9eae375140d770737bc074d75272415e045ab43f6cb215cc2eebbf8d3331bb"
+  },
+  "decision": "Exclude chopsticks from accepted named-BEV results. Regenerate or manually correct its 2D query masks before retrying object-ID voting.",
   "coordinate_note": "Spatial statistics are in reconstruction coordinates, not a calibrated robot frame."
 }

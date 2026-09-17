@@ -40,7 +40,22 @@ def main() -> None:
     labels = data["bev_semantic_ids"]
     unknown = data["bev_unknown_mask"]
 
-    queries = list(mapping["queries"].items())
+    configured_queries = list(mapping["queries"].items())
+    queries = [
+        (query, info)
+        for query, info in configured_queries
+        if info.get("include_in_named_bev", True)
+    ]
+    excluded_queries = [
+        {
+            "query": query,
+            "status": info["status"],
+            "object_ids": info["object_ids"],
+            "quality_note": info.get("quality_note", ""),
+        }
+        for query, info in configured_queries
+        if not info.get("include_in_named_bev", True)
+    ]
     named = np.full(labels.shape, -1, dtype=np.int16)
     owner_by_id: dict[int, str] = {}
     stats: dict[str, dict[str, object]] = {}
@@ -93,7 +108,9 @@ def main() -> None:
     summary = {
         "scene": mapping["scene"],
         "mapping_method": mapping["mapping_method"],
-        "query_count": len(queries),
+        "configured_query_count": len(configured_queries),
+        "accepted_query_count": len(queries),
+        "excluded_queries": excluded_queries,
         "configured_object_id_count": len(owner_by_id),
         "overlapping_object_id_assignments": overlaps,
         "bounded_full_scene_bev_known_cells": known_cells,
@@ -142,7 +159,7 @@ def main() -> None:
         interpolation="nearest",
         aspect="equal",
     )
-    axes[1].set_title("Query-grounded object IDs")
+    axes[1].set_title("Accepted query-grounded object IDs")
 
     axes[2].imshow(
         np.log1p(evidence).T,
@@ -179,7 +196,7 @@ def main() -> None:
         axis.set_xlabel("reconstruction axis 0")
         axis.set_ylabel("reconstruction axis 1")
     fig.suptitle(
-        f"{mapping['scene']}: open-vocabulary query to object-ID BEV bridge",
+        f"{mapping['scene']}: quality-gated query to object-ID BEV bridge",
         fontsize=13,
     )
 

@@ -53,32 +53,30 @@ evidence accumulation. See
 
 ### Open-vocabulary query bridge
 
-Six language queries were grounded to 17 classifier object IDs by ILGS multi-view
-query-mask voting and isolated Gaussian export, then projected onto the same bounded
-full-scene BEV:
+Six language queries were processed by ILGS multi-view query-mask voting and isolated
+Gaussian export. A mask/overlay quality gate accepts five queries mapped to 12 classifier
+object IDs and rejects `chopsticks` before projection onto the bounded full-scene BEV:
 
 ![Named query mapping](docs/assets/ramen_named_query_bev.png)
 
-| Query | Object IDs | Query-export Gaussians | BEV cells |
+| Accepted query | Object IDs | Query-export Gaussians | BEV cells |
 |---|---|---:|---:|
-| chopsticks ⚠ | 1, 15, 57, 112, 119 | 213,370 | 7,152 |
 | egg | 107, 109, 123, 238 | 14,529 | 95 |
 | glass of water | 53, 75, 129, 141 | 57,004 | 1,268 |
 | pork belly | 120, 212 | 18,223 | 48 |
 | wavy noodles in bowl | 28 | 9,563 | 28 |
 | yellow bowl | 108 | 51,582 | 506 |
 
-The 17 assignments do not overlap and all are visible in this 200k-Gaussian run. Together
-they cover 9,097 of 36,196 BEV cells with evidence. `chopsticks` is deliberately flagged:
-its unusually large export and broad 7,152-cell footprint suggest background or adjacent
-regions may have been included. These are query-grounded ID mappings, not a trained
-human-category classifier or semantic OCC accuracy result. See
+The 12 accepted assignments do not overlap and all are visible in this 200k-Gaussian run.
+Together they cover 1,945 of 36,196 BEV cells with evidence (5.37%). These are
+query-grounded ID mappings, not a trained human-category classifier or semantic OCC
+accuracy result. See
 [`docs/ramen_named_query_bev.md`](docs/ramen_named_query_bev.md).
 
-A full-scene audit confirms that the export itself is internally consistent: all 213,370
-rows correspond to the selected IDs. Object ID 1 contributes 169,409 rows (79.40%) and is
-the primary mask-review candidate; it is not automatically discarded without checking the
-per-view overlays.
+`chopsticks` is rejected rather than merely hidden: one view supplies 175,751 pixels, or
+95.39% of all query-mask pixels, and visibly covers broad table/background regions.
+Removing dominant ID 1 still highlights unrelated cups and a distant noodle plate, so the
+remaining IDs are not promoted as a clean mapping.
 
 ### Real ILGS query export
 
@@ -179,7 +177,7 @@ PowerShell users can also run the source directly with `$env:PYTHONPATH="src"` i
 | Unit tests and synthetic demo | Completed |
 | ILGS PLY to voxel/BEV adapter | Completed |
 | Full-scene hard-label object-ID occupancy | Completed reference baseline |
-| Six-query open-vocabulary ID-to-BEV bridge | Completed with one diagnostic warning |
+| Quality-gated open-vocabulary ID-to-BEV bridge | Five accepted queries; one rejected audit |
 | Rotation-aware full covariance | Planned |
 | PyTorch/autograd implementation | Planned |
 | Camera-ray free-space supervision | Planned |

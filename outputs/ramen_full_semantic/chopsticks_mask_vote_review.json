@@ -1,0 +1,22 @@
+{
+  "scene": "ramen",
+  "query": "chopsticks",
+  "candidate": "exclude object ID 1",
+  "candidate_object_ids": [15, 57, 112, 119],
+  "candidate_gaussians": 43961,
+  "usable_view_count": 4,
+  "total_mask_pixels": 184238,
+  "views": [
+    {"index": 0, "mask_pixels": 1239, "mask_share": 0.0067249970147309455, "voted_ids": [119]},
+    {"index": 1, "mask_pixels": 101, "mask_share": 0.0005482039535817801, "voted_ids": [119]},
+    {"index": 2, "mask_pixels": 7147, "mask_share": 0.038792214418306756, "voted_ids": [119]},
+    {"index": 3, "mask_pixels": 175751, "mask_share": 0.9539345846133805, "voted_ids": [57, 15, 112, 150, 62]}
+  ],
+  "visual_review": {
+    "view_3_query_mask": "Broad table/background coverage; not a localized chopsticks mask.",
+    "candidate_selected_id_overlays": "Unrelated cups and a distant noodle plate are highlighted; localization is not consistent across views.",
+    "decision": "reject"
+  },
+  "next_action": "Regenerate or manually correct the per-view 2D chopsticks masks, then rerun voting. Do not include this query in accepted named-BEV results.",
+  "source_archive_sha256": "8e9eae375140d770737bc074d75272415e045ab43f6cb215cc2eebbf8d3331bb"
+}

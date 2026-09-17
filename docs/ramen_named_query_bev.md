@@ -2,9 +2,10 @@
 
 ## Purpose
 
-This experiment connects six human-readable text queries to the ILGS classifier object IDs
-selected by multi-view query-mask voting, then visualizes those IDs in the memory-bounded
-full-scene BEV. It does not reinterpret all 256 classifier indices as human semantic classes.
+This experiment processes six human-readable text queries with ILGS multi-view query-mask
+voting. Five pass a mask/overlay quality gate and are connected to classifier object IDs in
+the memory-bounded full-scene BEV; `chopsticks` is rejected. The experiment does not
+reinterpret all 256 classifier indices as human semantic classes.
 
 ## Reproduce
 
@@ -23,25 +24,23 @@ versioned.
 
 ## Query mapping and bounded-BEV result
 
-| Query | Object IDs | Export Gaussians | Usable views | BEV cells | Cells at occupancy ≥ 0.5 |
+| Accepted query | Object IDs | Export Gaussians | Usable views | BEV cells | Cells at occupancy ≥ 0.5 |
 |---|---|---:|---:|---:|---:|
-| chopsticks ⚠ | 1, 15, 57, 112, 119 | 213,370 | 4 | 7,152 | 5,926 |
 | egg | 107, 109, 123, 238 | 14,529 | 4 | 95 | 85 |
 | glass of water | 53, 75, 129, 141 | 57,004 | 4 | 1,268 | 1,047 |
 | pork belly | 120, 212 | 18,223 | 4 | 48 | 47 |
 | wavy noodles in bowl | 28 | 9,563 | 4 | 28 | 26 |
 | yellow bowl | 108 | 51,582 | 4 | 506 | 445 |
 
-All 17 configured IDs are visible in the bounded 200,000-Gaussian run and no ID is assigned
-to more than one query. The six mappings cover 9,097 cells, or 25.13% of the 36,196 BEV
-cells with Gaussian evidence.
+All 12 accepted IDs are visible in the bounded 200,000-Gaussian run and no ID is assigned
+to more than one accepted query. The five mappings cover 1,945 cells, or 5.37% of the
+36,196 BEV cells with Gaussian evidence.
 
-![Six-query named BEV](assets/ramen_named_query_bev.png)
+![Quality-gated named BEV](assets/ramen_named_query_bev.png)
 
 ## Interpretation boundaries
 
-- `chopsticks` requires mask inspection and re-export. Its 213,370 selected Gaussians and
-  7,152 BEV cells are unusually broad and likely include background or adjacent regions.
+- `chopsticks` is excluded because its masks and overlays fail the quality review below.
 - A mapping means the query-mask export selected those object IDs; it is not a semantic OCC
   ground-truth label and does not establish per-class IoU or mIoU.
 - The full-scene baseline keeps the top 200,000 Gaussians after filtering and uses the
@@ -72,11 +71,20 @@ they are not gravity-aligned views and do not identify a physical object by them
 
 ![Chopsticks object-ID spatial audit](assets/ramen_chopsticks_id_spatial_audit.png)
 
-ID 1 is therefore the first contamination candidate. Excluding it would leave IDs 15, 57,
-112 and 119, totaling 43,961 Gaussians and 908 cells in the current bounded BEV. This is a
-diagnostic candidate, not an accepted correction: the four per-view mask-vote overlays must
-show consistent physical chopstick localization before the mapping is replaced. The frozen
-decision record is in `configs/ramen_chopsticks_audit.json`.
+ID 1 was the first contamination candidate. Excluding it left IDs 15, 57, 112 and 119,
+totaling 43,961 Gaussians and 908 cells in the bounded BEV. The four-view review rejected
+that candidate as well:
+
+- view 3 contributes 175,751 of 184,238 total mask pixels (95.39%) and its query mask
+  visibly covers broad table/background regions;
+- IDs 15, 57 and 112 receive votes only from that failed view;
+- ID 119 receives votes from views 0–2, but its overlays highlight unrelated cups and a
+  distant noodle plate rather than consistently localizing the main-scene chopsticks.
+
+The final decision is to exclude `chopsticks` from the named BEV until its per-view 2D masks
+are regenerated or manually corrected. The frozen decision record is in
+`configs/ramen_chopsticks_audit.json`, with the compact review evidence in
+`outputs/ramen_full_semantic/chopsticks_mask_vote_review.json`.
 
 Server-side audit rerun:
 
@@ -89,5 +97,5 @@ python export_query_gaussians.py \
   --skip_normals
 ```
 
-This rerun writes `mask_vote_summary.json` plus `mask_vote_vis/*_rgb_query_selected.png`,
-which are the evidence needed for the final accept/reject decision.
+This rerun produced `mask_vote_summary.json` and four
+`mask_vote_vis/*_rgb_query_selected.png` overlays used for the rejection decision.
