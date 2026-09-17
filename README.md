@@ -51,20 +51,29 @@ union. This is a memory-efficient reference baseline, not equivalent to full per
 evidence accumulation. See
 [`docs/full_scene_semantic_result.md`](docs/full_scene_semantic_result.md).
 
-### Human-readable query bridge
+### Open-vocabulary query bridge
 
-The query-isolated `pork belly` PLY maps to classifier object IDs `212` and `120`:
+Six language queries were grounded to 17 classifier object IDs by ILGS multi-view
+query-mask voting and isolated Gaussian export, then projected onto the same bounded
+full-scene BEV:
 
-![Pork belly query mapping](docs/assets/ramen_pork_belly_query_bev.png)
+![Named query mapping](docs/assets/ramen_named_query_bev.png)
 
-| Object ID | Query-export Gaussians | Share |
-|---:|---:|---:|
-| 212 | 10,310 | 56.58% |
-| 120 | 7,913 | 43.42% |
+| Query | Object IDs | Query-export Gaussians | BEV cells |
+|---|---|---:|---:|
+| chopsticks ⚠ | 1, 15, 57, 112, 119 | 213,370 | 7,152 |
+| egg | 107, 109, 123, 238 | 14,529 | 95 |
+| glass of water | 53, 75, 129, 141 | 57,004 | 1,268 |
+| pork belly | 120, 212 | 18,223 | 48 |
+| wavy noodles in bowl | 28 | 9,563 | 28 |
+| yellow bowl | 108 | 51,582 | 506 |
 
-In the bounded full-scene BEV these IDs occupy 48 labeled cells. The mapping is grounded
-in the exported query subset; the other classifier IDs remain unnamed until their own
-mask-vote/query exports are available.
+The 17 assignments do not overlap and all are visible in this 200k-Gaussian run. Together
+they cover 9,097 of 36,196 BEV cells with evidence. `chopsticks` is deliberately flagged:
+its unusually large export and broad 7,152-cell footprint suggest background or adjacent
+regions may have been included. These are query-grounded ID mappings, not a trained
+human-category classifier or semantic OCC accuracy result. See
+[`docs/ramen_named_query_bev.md`](docs/ramen_named_query_bev.md).
 
 ### Real ILGS query export
 
@@ -165,6 +174,7 @@ PowerShell users can also run the source directly with `$env:PYTHONPATH="src"` i
 | Unit tests and synthetic demo | Completed |
 | ILGS PLY to voxel/BEV adapter | Completed |
 | Full-scene hard-label object-ID occupancy | Completed reference baseline |
+| Six-query open-vocabulary ID-to-BEV bridge | Completed with one diagnostic warning |
 | Rotation-aware full covariance | Planned |
 | PyTorch/autograd implementation | Planned |
 | Camera-ray free-space supervision | Planned |
@@ -175,10 +185,10 @@ This supports the resume claim **“implemented a Gaussian-to-voxel reference ba
 
 ## Next engineering steps
 
-1. Export semantic Gaussians from an ILGS scene and define metric coordinates.
-2. Add quaternion/full-covariance projection and PyTorch gradient checks.
-3. Introduce camera-ray free/occupied/unknown supervision.
-4. Evaluate occupied IoU, semantic mIoU, latency and memory on a public subset.
+1. Audit the oversized `chopsticks` query masks and repeat the export.
+2. Define metric reconstruction-to-robot coordinates.
+3. Add quaternion/full-covariance projection and PyTorch gradient checks.
+4. Introduce camera-ray free/occupied/unknown supervision and public-data evaluation.
 5. Add a ROS2 `nav_msgs/OccupancyGrid` adapter and simulation smoke test.
 
 The frozen experiment protocol is in [`docs/experiment_plan.md`](docs/experiment_plan.md), and progress boundaries are tracked in [`docs/status.md`](docs/status.md).

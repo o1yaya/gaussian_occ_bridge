@@ -1,14 +1,45 @@
 {
   "scene": "ramen",
+  "mapping_method": "ILGS multi-view query-mask voting and isolated Gaussian export",
+  "coordinate_note": "Mappings name classifier object IDs only; BEV axes remain reconstruction axes.",
   "queries": {
-    "chopsticks": {"status": "requires-query-export"},
-    "egg": {"status": "requires-query-export"},
-    "glass of water": {"status": "requires-query-export"},
+    "chopsticks": {
+      "status": "mapped-with-diagnostic-warning",
+      "object_ids": [1, 15, 57, 112, 119],
+      "selected_gaussians": 213370,
+      "usable_view_count": 4,
+      "quality_note": "The unusually large query subset may include background or adjacent regions; verify masks before treating this as a clean category mapping."
+    },
+    "egg": {
+      "status": "mapped-from-mask-vote-export",
+      "object_ids": [107, 109, 123, 238],
+      "selected_gaussians": 14529,
+      "usable_view_count": 4
+    },
+    "glass of water": {
+      "status": "mapped-from-mask-vote-export",
+      "object_ids": [53, 75, 129, 141],
+      "selected_gaussians": 57004,
+      "usable_view_count": 4
+    },
     "pork belly": {
-      "status": "mapped",
+      "status": "mapped-from-mask-vote-export-and-verified-locally",
+      "object_ids": [120, 212],
+      "selected_gaussians": 18223,
+      "usable_view_count": 4,
       "mapping_file": "ramen_pork_belly_object_ids.json"
     },
-    "wavy noodles in bowl": {"status": "requires-query-export"},
-    "yellow bowl": {"status": "requires-query-export"}
+    "wavy noodles in bowl": {
+      "status": "mapped-from-mask-vote-export",
+      "object_ids": [28],
+      "selected_gaussians": 9563,
+      "usable_view_count": 4
+    },
+    "yellow bowl": {
+      "status": "mapped-from-mask-vote-export",
+      "object_ids": [108],
+      "selected_gaussians": 51582,
+      "usable_view_count": 4
+    }
   }
 }

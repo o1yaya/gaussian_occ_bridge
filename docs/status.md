@@ -20,3 +20,17 @@
   hashed 18,223-Gaussian query export; other query labels remain explicitly unmapped.
 
 Current claim level: a runnable reference baseline exists. Dataset-scale results, free-space ray supervision, dynamic reconstruction and ROS2 integration are not complete.
+
+## 2026-09-17
+
+- Completed ILGS query-mask exports for six `ramen` language queries and recorded their
+  17 non-overlapping classifier object IDs.
+- Projected the named IDs through the bounded full-scene hard-label BEV; all configured
+  IDs are visible and together cover 9,097 of 36,196 cells with evidence.
+- Added a reproducible three-panel named-query visualization and machine-readable summary.
+- Flagged `chopsticks` as a diagnostic result because its 213,370-Gaussian export and
+  7,152-cell footprint are unusually broad and may contain background leakage.
+
+Current claim level: the repository now demonstrates a reproducible open-vocabulary
+query-to-object-ID-to-BEV bridge. It still does not provide metric robot-frame coordinates,
+free-space supervision, semantic OCC ground truth, dynamic reconstruction or ROS2 closure.

@@ -1,0 +1,151 @@
+{
+  "scene": "ramen",
+  "mapping_method": "ILGS multi-view query-mask voting and isolated Gaussian export",
+  "query_count": 6,
+  "configured_object_id_count": 17,
+  "overlapping_object_id_assignments": [],
+  "bounded_full_scene_bev_known_cells": 36196,
+  "mapped_bev_cells": 9097,
+  "mapped_fraction_of_known_bev": 0.2513261133826942,
+  "coordinate_note": "Mappings name classifier object IDs only; BEV axes remain reconstruction axes.",
+  "unknown_space_note": "Cells without Gaussian evidence are unknown, not free.",
+  "hard_label_note": "Each BEV cell carries the strongest height-wise voxel label from the memory-bounded hard-label baseline.",
+  "queries": {
+    "chopsticks": {
+      "configured_object_ids": [
+        1,
+        15,
+        57,
+        112,
+        119
+      ],
+      "object_ids_visible_in_bounded_bev": [
+        1,
+        15,
+        57,
+        112,
+        119
+      ],
+      "object_ids_absent_from_bounded_bev": [],
+      "bev_cells": 7152,
+      "bev_cells_at_occupancy_ge_0_5": 5926,
+      "bev_cells_by_object_id": {
+        "1": 6244,
+        "15": 473,
+        "57": 269,
+        "112": 131,
+        "119": 35
+      },
+      "selected_gaussians_in_query_export": 213370,
+      "usable_view_count": 4,
+      "status": "mapped-with-diagnostic-warning",
+      "quality_note": "The unusually large query subset may include background or adjacent regions; verify masks before treating this as a clean category mapping."
+    },
+    "egg": {
+      "configured_object_ids": [
+        107,
+        109,
+        123,
+        238
+      ],
+      "object_ids_visible_in_bounded_bev": [
+        107,
+        109,
+        123,
+        238
+      ],
+      "object_ids_absent_from_bounded_bev": [],
+      "bev_cells": 95,
+      "bev_cells_at_occupancy_ge_0_5": 85,
+      "bev_cells_by_object_id": {
+        "107": 37,
+        "109": 53,
+        "123": 2,
+        "238": 3
+      },
+      "selected_gaussians_in_query_export": 14529,
+      "usable_view_count": 4,
+      "status": "mapped-from-mask-vote-export"
+    },
+    "glass of water": {
+      "configured_object_ids": [
+        53,
+        75,
+        129,
+        141
+      ],
+      "object_ids_visible_in_bounded_bev": [
+        53,
+        75,
+        129,
+        141
+      ],
+      "object_ids_absent_from_bounded_bev": [],
+      "bev_cells": 1268,
+      "bev_cells_at_occupancy_ge_0_5": 1047,
+      "bev_cells_by_object_id": {
+        "53": 87,
+        "75": 322,
+        "129": 719,
+        "141": 140
+      },
+      "selected_gaussians_in_query_export": 57004,
+      "usable_view_count": 4,
+      "status": "mapped-from-mask-vote-export"
+    },
+    "pork belly": {
+      "configured_object_ids": [
+        120,
+        212
+      ],
+      "object_ids_visible_in_bounded_bev": [
+        120,
+        212
+      ],
+      "object_ids_absent_from_bounded_bev": [],
+      "bev_cells": 48,
+      "bev_cells_at_occupancy_ge_0_5": 47,
+      "bev_cells_by_object_id": {
+        "120": 17,
+        "212": 31
+      },
+      "selected_gaussians_in_query_export": 18223,
+      "usable_view_count": 4,
+      "status": "mapped-from-mask-vote-export-and-verified-locally"
+    },
+    "wavy noodles in bowl": {
+      "configured_object_ids": [
+        28
+      ],
+      "object_ids_visible_in_bounded_bev": [
+        28
+      ],
+      "object_ids_absent_from_bounded_bev": [],
+      "bev_cells": 28,
+      "bev_cells_at_occupancy_ge_0_5": 26,
+      "bev_cells_by_object_id": {
+        "28": 28
+      },
+      "selected_gaussians_in_query_export": 9563,
+      "usable_view_count": 4,
+      "status": "mapped-from-mask-vote-export"
+    },
+    "yellow bowl": {
+      "configured_object_ids": [
+        108
+      ],
+      "object_ids_visible_in_bounded_bev": [
+        108
+      ],
+      "object_ids_absent_from_bounded_bev": [],
+      "bev_cells": 506,
+      "bev_cells_at_occupancy_ge_0_5": 445,
+      "bev_cells_by_object_id": {
+        "108": 506
+      },
+      "selected_gaussians_in_query_export": 51582,
+      "usable_view_count": 4,
+      "status": "mapped-from-mask-vote-export"
+    }
+  }
+}

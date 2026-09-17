@@ -104,6 +104,11 @@ semantic BEV, these IDs account for 48 labeled cells (31 from ID 212 and 17 from
 
 ![Pork belly query bridge](assets/ramen_pork_belly_query_bev.png)
 
-This establishes one human-readable anchor without assigning guessed names to the other
-45 active IDs. The remaining ramen queries require their own query-mask vote or isolated
-Gaussian export.
+The same export procedure was subsequently run for the other five ramen queries. Across
+all six queries, 17 non-overlapping object IDs are grounded and all appear in the bounded
+full-scene BEV. They cover 9,097 of 36,196 cells with evidence. The named result and exact
+per-query counts are documented in [`ramen_named_query_bev.md`](ramen_named_query_bev.md).
+
+The `chopsticks` result remains diagnostic rather than presentation-grade: its export has
+213,370 Gaussians and covers 7,152 BEV cells, far more than the other queries, so its source
+masks should be audited for background or adjacent-region leakage.
