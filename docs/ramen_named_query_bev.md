@@ -3,9 +3,9 @@
 ## Purpose
 
 This experiment processes six human-readable text queries with ILGS multi-view query-mask
-voting. `pork belly` has passed a four-view overlay review, four mappings await the same
-review, and `chopsticks` is rejected. Only accepted mappings appear in the named BEV. The
-experiment does not reinterpret all 256 classifier indices as human semantic classes.
+voting. Five queries pass the automatic checks and four-view overlay review, while
+`chopsticks` is rejected. Only accepted mappings appear in the named BEV. The experiment
+does not reinterpret all 256 classifier indices as human semantic classes.
 
 ## Reproduce
 
@@ -26,12 +26,16 @@ versioned.
 
 | Accepted query | Object IDs | Export Gaussians | Usable views | BEV cells | Cells at occupancy ≥ 0.5 |
 |---|---|---:|---:|---:|---:|
+| egg | 107, 109, 123, 238 | 14,529 | 4 | 95 | 85 |
+| glass of water ⚠ | 53, 75, 129, 141 | 57,004 | 4 | 1,268 | 1,047 |
 | pork belly | 120, 212 | 18,223 | 4 | 48 | 47 |
+| wavy noodles in bowl | 28 | 9,563 | 4 | 28 | 26 |
+| yellow bowl | 108 | 51,582 | 4 | 506 | 445 |
 
-The two accepted IDs are visible in the bounded 200,000-Gaussian run and cover 48 of the
-36,196 BEV cells with Gaussian evidence. The four pending candidates are `egg`, `glass of
-water`, `wavy noodles in bowl` and `yellow bowl`; their IDs are withheld from the accepted
-figure until their mask-vote summaries and overlays are reviewed.
+The 12 accepted IDs are visible in the bounded 200,000-Gaussian run and cover 1,945 of the
+36,196 BEV cells with Gaussian evidence (5.37%). For `glass of water`, ID 141 has only one
+supporting view; the query is accepted because the four complete overlays consistently
+localize the glass, but the ID-level warning remains recorded.
 
 ![Quality-gated named BEV](assets/ramen_named_query_bev.png)
 
@@ -108,3 +112,15 @@ overlays are inspected. The `chopsticks` rerun triggers two rejection rules (95.
 view share and only 20.55% retained vote coverage) plus a weak cross-view-support warning.
 The default thresholds are diagnostic engineering gates, not learned confidence calibration
 or benchmark-derived semantic accuracy thresholds.
+
+| Query | Dominant-view share | Vote coverage | Visual decision | Final |
+|---|---:|---:|---|---|
+| egg | 32.18% | 100% | accept | accept |
+| glass of water | 36.18% | 100% | accept with ID 141 warning | accept |
+| pork belly | 31.97% | 100% | accept | accept |
+| wavy noodles in bowl | 37.12% | 100% | accept | accept |
+| yellow bowl | 34.92% | 100% | accept | accept |
+| chopsticks | 95.39% | 20.55% | reject | reject |
+
+The downloaded audit archive is pinned by SHA-256 in
+`outputs/ramen_full_semantic/query_quality_gate_summary.json`.

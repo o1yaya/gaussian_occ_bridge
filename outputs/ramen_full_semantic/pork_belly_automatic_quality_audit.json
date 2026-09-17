@@ -1,0 +1,67 @@
+{
+  "query": "pork belly",
+  "source_summary": "mask_vote_summary.json",
+  "automatic_decision": "needs-visual-review",
+  "reject_reasons": [],
+  "warnings": [],
+  "usable_view_count": 4,
+  "total_mask_pixels": 175356,
+  "voted_mask_pixels": 175356,
+  "vote_coverage": 1.0,
+  "dominant_view": {
+    "index": 1,
+    "mask_pixels": 56059,
+    "mask_share": 0.3196868085494651
+  },
+  "views": [
+    {
+      "index": 0,
+      "mask_pixels": 38392,
+      "mask_share": 0.2189374757635895
+    },
+    {
+      "index": 1,
+      "mask_pixels": 56059,
+      "mask_share": 0.3196868085494651
+    },
+    {
+      "index": 2,
+      "mask_pixels": 27855,
+      "mask_share": 0.1588482857729419
+    },
+    {
+      "index": 3,
+      "mask_pixels": 53050,
+      "mask_share": 0.3025274299140035
+    }
+  ],
+  "selected_ids": [
+    212,
+    120
+  ],
+  "selected_id_view_support": {
+    "212": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "120": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "under_supported_selected_ids": [],
+  "thresholds": {
+    "reject_dominant_view_share": 0.9,
+    "warn_dominant_view_share": 0.75,
+    "reject_min_vote_coverage": 0.5,
+    "warn_min_cross_view_support": 2
+  },
+  "interpretation": "Automatic checks detect degenerate vote distributions only. A non-rejected result still requires visual review before semantic acceptance.",
+  "visual_decision": "accept",
+  "visual_note": "All four views consistently localize the pork-belly slices with close mask and selected-ID boundaries.",
+  "final_decision": "accept"
+}

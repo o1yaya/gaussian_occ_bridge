@@ -54,24 +54,24 @@ evidence accumulation. See
 ### Open-vocabulary query bridge
 
 Six language queries were processed by ILGS multi-view query-mask voting and isolated
-Gaussian export. The quality gate currently accepts `pork belly`, keeps four mappings
-pending their overlay review, and rejects `chopsticks` before named-BEV publication:
+Gaussian export. The automatic checks and four-view overlay review accept five queries
+mapped to 12 classifier object IDs and reject `chopsticks` before named-BEV publication:
 
 ![Named query mapping](docs/assets/ramen_named_query_bev.png)
 
 | Query | Object IDs | Query-export Gaussians | Gate status |
 |---|---|---:|---|
-| egg | 107, 109, 123, 238 | 14,529 | pending overlay review |
-| glass of water | 53, 75, 129, 141 | 57,004 | pending overlay review |
+| egg | 107, 109, 123, 238 | 14,529 | accepted |
+| glass of water | 53, 75, 129, 141 | 57,004 | accepted; ID 141 warning |
 | pork belly | 120, 212 | 18,223 | accepted |
-| wavy noodles in bowl | 28 | 9,563 | pending overlay review |
-| yellow bowl | 108 | 51,582 | pending overlay review |
+| wavy noodles in bowl | 28 | 9,563 | accepted |
+| yellow bowl | 108 | 51,582 | accepted |
 | chopsticks | candidate IDs rejected | 213,370 | rejected |
 
-The accepted `pork belly` IDs cover 48 of 36,196 BEV cells with evidence. Four other
-non-overlapping candidate mappings are recorded but deliberately withheld from this figure
-until the same automatic and visual review is complete. These are query-grounded ID
-mappings, not a trained human-category classifier or semantic OCC accuracy result. See
+The 12 accepted assignments are non-overlapping and cover 1,945 of 36,196 BEV cells with
+evidence (5.37%). `glass of water` is accepted at query level while ID 141 retains a
+single-view-support warning. These are query-grounded ID mappings, not a trained
+human-category classifier or semantic OCC accuracy result. See
 [`docs/ramen_named_query_bev.md`](docs/ramen_named_query_bev.md).
 
 `chopsticks` is rejected rather than merely hidden: one view supplies 175,751 pixels, or
@@ -178,7 +178,7 @@ PowerShell users can also run the source directly with `$env:PYTHONPATH="src"` i
 | Unit tests and synthetic demo | Completed |
 | ILGS PLY to voxel/BEV adapter | Completed |
 | Full-scene hard-label object-ID occupancy | Completed reference baseline |
-| Quality-gated open-vocabulary ID-to-BEV bridge | One accepted, four pending, one rejected |
+| Quality-gated open-vocabulary ID-to-BEV bridge | Five accepted, one rejected |
 | Automatic mask-vote quality gate | Completed; four deterministic tests |
 | Rotation-aware full covariance | Planned |
 | PyTorch/autograd implementation | Planned |

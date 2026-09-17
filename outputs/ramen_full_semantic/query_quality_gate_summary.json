@@ -1,0 +1,55 @@
+{
+  "scene": "ramen",
+  "evidence_archive": "ramen_query_quality_evidence.tar.gz",
+  "evidence_archive_sha256": "6882a2b916bc5445abafd45d54ab7e9074a7bf1de77a5881307ad01f7f494b6b",
+  "gate_definition": "Automatic distribution checks followed by four-view query-mask and selected-ID overlay review.",
+  "accepted_query_count": 5,
+  "rejected_query_count": 1,
+  "queries": {
+    "egg": {
+      "automatic_decision": "needs-visual-review",
+      "dominant_view_share": 0.321826206713458,
+      "vote_coverage": 1.0,
+      "visual_decision": "accept",
+      "final_decision": "accept"
+    },
+    "glass of water": {
+      "automatic_decision": "needs-visual-review",
+      "dominant_view_share": 0.361772690481136,
+      "vote_coverage": 1.0,
+      "weak_cross_view_object_ids": [141],
+      "visual_decision": "accept",
+      "final_decision": "accept-with-warning"
+    },
+    "pork belly": {
+      "automatic_decision": "needs-visual-review",
+      "dominant_view_share": 0.319686808549465,
+      "vote_coverage": 1.0,
+      "visual_decision": "accept",
+      "final_decision": "accept"
+    },
+    "wavy noodles in bowl": {
+      "automatic_decision": "needs-visual-review",
+      "dominant_view_share": 0.371204334488666,
+      "vote_coverage": 1.0,
+      "visual_decision": "accept",
+      "final_decision": "accept"
+    },
+    "yellow bowl": {
+      "automatic_decision": "needs-visual-review",
+      "dominant_view_share": 0.349153528177645,
+      "vote_coverage": 1.0,
+      "visual_decision": "accept",
+      "final_decision": "accept"
+    },
+    "chopsticks": {
+      "automatic_decision": "reject",
+      "dominant_view_share": 0.9539345846133805,
+      "vote_coverage": 0.20554934378358428,
+      "weak_cross_view_object_ids": [57, 15, 112],
+      "visual_decision": "reject",
+      "final_decision": "reject"
+    }
+  },
+  "interpretation": "Acceptance supports query-to-object-ID integration evidence only; it is not semantic OCC ground-truth accuracy."
+}

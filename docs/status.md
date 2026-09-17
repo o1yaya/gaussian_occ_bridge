@@ -23,10 +23,10 @@ Current claim level: a runnable reference baseline exists. Dataset-scale results
 
 ## 2026-09-17
 
-- Completed ILGS query-mask exports for six `ramen` language queries. `pork belly` passes a
-  four-view overlay review, four mappings are pending review and `chopsticks` is rejected.
-- Projected the currently accepted IDs through the bounded full-scene hard-label BEV; the
-  two `pork belly` IDs cover 48 of 36,196 cells with evidence.
+- Completed ILGS query-mask exports and four-view reviews for six `ramen` language queries.
+  Five pass and map to 12 non-overlapping object IDs; `chopsticks` is rejected.
+- Projected the accepted IDs through the bounded full-scene hard-label BEV; they cover
+  1,945 of 36,196 cells with evidence (5.37%).
 - Added a reproducible three-panel named-query visualization and machine-readable summary.
 - Flagged `chopsticks` as a diagnostic result because its 213,370-Gaussian export and
   7,152-cell footprint are unusually broad and may contain background leakage.
@@ -39,7 +39,6 @@ Current claim level: a runnable reference baseline exists. Dataset-scale results
   human overlay review before acceptance.
 
 Current claim level: the repository demonstrates a reproducible, quality-gated
-open-vocabulary query-to-object-ID-to-BEV bridge with one accepted query, four pending
-reviews and one documented rejection. It still does not provide metric robot-frame
-coordinates, free-space supervision, semantic OCC ground truth, dynamic reconstruction or
-ROS2 closure.
+open-vocabulary query-to-object-ID-to-BEV bridge with five accepted queries and one
+documented rejection. It still does not provide metric robot-frame coordinates, free-space
+supervision, semantic OCC ground truth, dynamic reconstruction or ROS2 closure.

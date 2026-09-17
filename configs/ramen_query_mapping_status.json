@@ -12,18 +12,19 @@
       "quality_note": "Rejected: view 3 contributes 95.39% of all query-mask pixels and covers broad table/background regions; removing ID 1 does not yield stable chopstick localization in the remaining overlays."
     },
     "egg": {
-      "status": "pending-overlay-review",
-      "include_in_named_bev": false,
+      "status": "accepted-after-automatic-and-four-view-review",
+      "include_in_named_bev": true,
       "object_ids": [107, 109, 123, 238],
       "selected_gaussians": 14529,
       "usable_view_count": 4
     },
     "glass of water": {
-      "status": "pending-overlay-review",
-      "include_in_named_bev": false,
+      "status": "accepted-with-weak-id-warning-after-four-view-review",
+      "include_in_named_bev": true,
       "object_ids": [53, 75, 129, 141],
       "selected_gaussians": 57004,
-      "usable_view_count": 4
+      "usable_view_count": 4,
+      "quality_note": "Accepted at query level; object ID 141 has single-view support and remains a documented warning."
     },
     "pork belly": {
       "status": "accepted-after-four-view-overlay-review",
@@ -34,15 +35,15 @@
       "mapping_file": "ramen_pork_belly_object_ids.json"
     },
     "wavy noodles in bowl": {
-      "status": "pending-overlay-review",
-      "include_in_named_bev": false,
+      "status": "accepted-after-automatic-and-four-view-review",
+      "include_in_named_bev": true,
       "object_ids": [28],
       "selected_gaussians": 9563,
       "usable_view_count": 4
     },
     "yellow bowl": {
-      "status": "pending-overlay-review",
-      "include_in_named_bev": false,
+      "status": "accepted-after-automatic-and-four-view-review",
+      "include_in_named_bev": true,
       "object_ids": [108],
       "selected_gaussians": 51582,
       "usable_view_count": 4
