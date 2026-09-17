@@ -30,6 +30,9 @@ Current claim level: a runnable reference baseline exists. Dataset-scale results
 - Added a reproducible three-panel named-query visualization and machine-readable summary.
 - Flagged `chopsticks` as a diagnostic result because its 213,370-Gaussian export and
   7,152-cell footprint are unusually broad and may contain background leakage.
+- Audited all six mappings against a fresh full-scene classifier pass: every export count
+  matches its mapped-ID membership exactly. For `chopsticks`, ID 1 contributes 169,409
+  Gaussians (79.40%) and is now the explicit source-mask review candidate.
 
 Current claim level: the repository now demonstrates a reproducible open-vocabulary
 query-to-object-ID-to-BEV bridge. It still does not provide metric robot-frame coordinates,

@@ -50,3 +50,44 @@ cells with Gaussian evidence.
 - The plot uses reconstruction axes. Axis 2 has not been calibrated as gravity/up, so this is
   an axis-reduced representation rather than a robot-frame navigation map.
 - Cells without Gaussian evidence remain unknown, not free.
+
+## Chopsticks diagnostic audit
+
+The query-export count was checked against a fresh classifier pass over all 854,507 scene
+Gaussians. Every query count matches the full-scene membership of its mapped IDs exactly,
+so the large `chopsticks` result is not caused by export duplication or dropped rows.
+
+| Diagnostic | Chopsticks result |
+|---|---:|
+| Fraction of all scene Gaussians | 24.97% |
+| Fraction of bounded known BEV cells | 19.76% |
+| Dominant ID | 1 |
+| ID 1 Gaussians | 169,409 (79.40% of export) |
+| Robust axis-0 span relative to scene | 63.59% |
+
+![Query mapping audit](assets/ramen_query_mapping_audit.png)
+
+The reconstruction-coordinate projections below separate the five selected IDs spatially;
+they are not gravity-aligned views and do not identify a physical object by themselves.
+
+![Chopsticks object-ID spatial audit](assets/ramen_chopsticks_id_spatial_audit.png)
+
+ID 1 is therefore the first contamination candidate. Excluding it would leave IDs 15, 57,
+112 and 119, totaling 43,961 Gaussians and 908 cells in the current bounded BEV. This is a
+diagnostic candidate, not an accepted correction: the four per-view mask-vote overlays must
+show consistent physical chopstick localization before the mapping is replaced. The frozen
+decision record is in `configs/ramen_chopsticks_audit.json`.
+
+Server-side audit rerun:
+
+```bash
+python export_query_gaussians.py \
+  -m output/lerf/ramen_refined_masks \
+  --query "chopsticks" \
+  --output_dir /media/cx/data/cxdata/ILGS_grasp_exports/lerf/ramen_refined_masks/iteration_30000/test/chopsticks_no_id1 \
+  --exclude_ids 1 \
+  --skip_normals
+```
+
+This rerun writes `mask_vote_summary.json` plus `mask_vote_vis/*_rgb_query_selected.png`,
+which are the evidence needed for the final accept/reject decision.

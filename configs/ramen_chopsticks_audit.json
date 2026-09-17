@@ -1,0 +1,22 @@
+{
+  "scene": "ramen",
+  "query": "chopsticks",
+  "audit_status": "requires-source-mask-review",
+  "original_object_ids": [1, 15, 57, 112, 119],
+  "original_selected_gaussians": 213370,
+  "full_scene_fraction": 0.24969953435138623,
+  "known_bev_cell_fraction": 0.19759089402143884,
+  "dominant_object_id": 1,
+  "dominant_object_id_gaussians": 169409,
+  "dominant_object_id_share_of_query_export": 0.7939682242114636,
+  "diagnostic_candidate": {
+    "action": "rerun the query export while excluding object ID 1, then inspect all four mask-vote overlays",
+    "remaining_object_ids_if_votes_are_unchanged": [15, 57, 112, 119],
+    "expected_gaussians_if_votes_are_unchanged": 43961,
+    "expected_full_scene_fraction_if_votes_are_unchanged": 0.051446038475986736,
+    "expected_bounded_bev_cells_if_votes_are_unchanged": 908,
+    "expected_known_bev_cell_fraction_if_votes_are_unchanged": 0.025085644822632334
+  },
+  "decision_rule": "Do not replace the original mapping solely from these size statistics. Accept the no-ID-1 candidate only if the per-view query mask and selected-ID overlays localize the physical chopsticks consistently.",
+  "coordinate_note": "Spatial statistics are in reconstruction coordinates, not a calibrated robot frame."
+}

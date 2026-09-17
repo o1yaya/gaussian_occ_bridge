@@ -1,0 +1,305 @@
+{
+  "scene": "ramen",
+  "source_ply": "ramen_point_cloud.ply",
+  "source_ply_sha256": "8fae40798cc9f27764e6e2bf29734c569da015726ecb8b30770a5c906acd6ec8",
+  "classifier_npz": "ramen_classifier.npz",
+  "classifier_npz_sha256": "16e448eddb928db7e818fae95ca43974def2d7a974cf4c1d041c074d36296c9b",
+  "scene_gaussian_count": 854507,
+  "scene_robust_q01_q99_min_reconstruction_xyz": [
+    -6.397705078125,
+    -4.126036167144775,
+    -11.041512489318848
+  ],
+  "scene_robust_q01_q99_max_reconstruction_xyz": [
+    14.108083724975586,
+    23.979299545288086,
+    8.754399299621582
+  ],
+  "thresholds": {
+    "warning_scene_fraction": 0.1,
+    "warning_bev_fraction": 0.1,
+    "warning_count_error": 0.01
+  },
+  "coordinate_note": "All spatial statistics use reconstruction coordinates; no gravity or metric robot frame is assumed.",
+  "interpretation": "Query labels come from mask-vote exports. Threshold warnings identify mappings that require visual audit; they do not prove semantic failure.",
+  "queries": {
+    "chopsticks": {
+      "object_ids": [
+        1,
+        15,
+        57,
+        112,
+        119
+      ],
+      "query_export_gaussians": 213370,
+      "full_scene_gaussians_with_mapped_ids": 213370,
+      "count_difference": 0,
+      "relative_count_error": 0.0,
+      "fraction_of_all_scene_gaussians": 0.24969953435138623,
+      "gaussians_by_object_id": {
+        "1": 169409,
+        "15": 16066,
+        "57": 5086,
+        "112": 5026,
+        "119": 17783
+      },
+      "centroid_reconstruction_xyz": [
+        1.9371201992034912,
+        1.9429144859313965,
+        3.1851909160614014
+      ],
+      "robust_q01_q99_min_reconstruction_xyz": [
+        -4.822856903076172,
+        -2.73197865486145,
+        -0.19526906311511993
+      ],
+      "robust_q01_q99_max_reconstruction_xyz": [
+        8.217535972595215,
+        4.546924591064453,
+        8.143783569335938
+      ],
+      "robust_extent_reconstruction_xyz": [
+        13.040392875671387,
+        7.278903007507324,
+        8.339052200317383
+      ],
+      "robust_extent_fraction_of_scene_xyz": [
+        0.6359371542930603,
+        0.25898653268814087,
+        0.42125123739242554
+      ],
+      "bounded_bev_cells": 7152,
+      "fraction_of_known_bev_cells": 0.19759089402143884,
+      "warnings": [
+        "mapped IDs cover an unusually large fraction of scene Gaussians",
+        "mapped IDs cover an unusually large fraction of known BEV cells",
+        "The unusually large query subset may include background or adjacent regions; verify masks before treating this as a clean category mapping."
+      ],
+      "audit_status": "warning"
+    },
+    "egg": {
+      "object_ids": [
+        107,
+        109,
+        123,
+        238
+      ],
+      "query_export_gaussians": 14529,
+      "full_scene_gaussians_with_mapped_ids": 14529,
+      "count_difference": 0,
+      "relative_count_error": 0.0,
+      "fraction_of_all_scene_gaussians": 0.017002786401983834,
+      "gaussians_by_object_id": {
+        "107": 6497,
+        "109": 4518,
+        "123": 1716,
+        "238": 1798
+      },
+      "centroid_reconstruction_xyz": [
+        -1.072189211845398,
+        2.077831268310547,
+        2.0456278324127197
+      ],
+      "robust_q01_q99_min_reconstruction_xyz": [
+        -4.9752984046936035,
+        -2.2093966007232666,
+        -0.15522083640098572
+      ],
+      "robust_q01_q99_max_reconstruction_xyz": [
+        2.9498441219329834,
+        5.34792423248291,
+        4.7620086669921875
+      ],
+      "robust_extent_reconstruction_xyz": [
+        7.925142288208008,
+        7.557320594787598,
+        4.917229652404785
+      ],
+      "robust_extent_fraction_of_scene_xyz": [
+        0.38648316264152527,
+        0.26889273524284363,
+        0.24839621782302856
+      ],
+      "bounded_bev_cells": 95,
+      "fraction_of_known_bev_cells": 0.0026245994032489776,
+      "warnings": [],
+      "audit_status": "no-threshold-warning"
+    },
+    "glass of water": {
+      "object_ids": [
+        53,
+        75,
+        129,
+        141
+      ],
+      "query_export_gaussians": 57004,
+      "full_scene_gaussians_with_mapped_ids": 57004,
+      "count_difference": 0,
+      "relative_count_error": 0.0,
+      "fraction_of_all_scene_gaussians": 0.06670981045210864,
+      "gaussians_by_object_id": {
+        "53": 4074,
+        "75": 10360,
+        "129": 33303,
+        "141": 9267
+      },
+      "centroid_reconstruction_xyz": [
+        1.0404384136199951,
+        0.9910097718238831,
+        2.9516592025756836
+      ],
+      "robust_q01_q99_min_reconstruction_xyz": [
+        -4.701495170593262,
+        -3.0146384239196777,
+        0.6592546701431274
+      ],
+      "robust_q01_q99_max_reconstruction_xyz": [
+        8.504794120788574,
+        4.01210880279541,
+        7.499175071716309
+      ],
+      "robust_extent_reconstruction_xyz": [
+        13.206289291381836,
+        7.026747226715088,
+        6.839920520782471
+      ],
+      "robust_extent_fraction_of_scene_xyz": [
+        0.6440273523330688,
+        0.2500147223472595,
+        0.34552186727523804
+      ],
+      "bounded_bev_cells": 1268,
+      "fraction_of_known_bev_cells": 0.03503149519283899,
+      "warnings": [],
+      "audit_status": "no-threshold-warning"
+    },
+    "pork belly": {
+      "object_ids": [
+        120,
+        212
+      ],
+      "query_export_gaussians": 18223,
+      "full_scene_gaussians_with_mapped_ids": 18223,
+      "count_difference": 0,
+      "relative_count_error": 0.0,
+      "fraction_of_all_scene_gaussians": 0.021325746892652722,
+      "gaussians_by_object_id": {
+        "120": 7913,
+        "212": 10310
+      },
+      "centroid_reconstruction_xyz": [
+        0.15404167771339417,
+        1.734416127204895,
+        2.3675780296325684
+      ],
+      "robust_q01_q99_min_reconstruction_xyz": [
+        -0.5331448316574097,
+        1.1740565299987793,
+        1.8401033878326416
+      ],
+      "robust_q01_q99_max_reconstruction_xyz": [
+        0.6174625158309937,
+        2.2287960052490234,
+        2.8175384998321533
+      ],
+      "robust_extent_reconstruction_xyz": [
+        1.1506073474884033,
+        1.0547394752502441,
+        0.9774351119995117
+      ],
+      "robust_extent_fraction_of_scene_xyz": [
+        0.05611134320497513,
+        0.037528086453676224,
+        0.04937560483813286
+      ],
+      "bounded_bev_cells": 48,
+      "fraction_of_known_bev_cells": 0.0013261133826942204,
+      "warnings": [],
+      "audit_status": "no-threshold-warning"
+    },
+    "wavy noodles in bowl": {
+      "object_ids": [
+        28
+      ],
+      "query_export_gaussians": 9563,
+      "full_scene_gaussians_with_mapped_ids": 9563,
+      "count_difference": 0,
+      "relative_count_error": 0.0,
+      "fraction_of_all_scene_gaussians": 0.01119124828702398,
+      "gaussians_by_object_id": {
+        "28": 9563
+      },
+      "centroid_reconstruction_xyz": [
+        -0.13580261170864105,
+        2.2500762939453125,
+        1.8739583492279053
+      ],
+      "robust_q01_q99_min_reconstruction_xyz": [
+        -1.5859509706497192,
+        0.896076500415802,
+        1.4710501432418823
+      ],
+      "robust_q01_q99_max_reconstruction_xyz": [
+        0.8651090860366821,
+        2.6275579929351807,
+        3.047128200531006
+      ],
+      "robust_extent_reconstruction_xyz": [
+        2.4510600566864014,
+        1.7314815521240234,
+        1.5760780572891235
+      ],
+      "robust_extent_fraction_of_scene_xyz": [
+        0.11953014880418777,
+        0.061606865376234055,
+        0.07961633801460266
+      ],
+      "bounded_bev_cells": 28,
+      "fraction_of_known_bev_cells": 0.0007735661399049619,
+      "warnings": [],
+      "audit_status": "no-threshold-warning"
+    },
+    "yellow bowl": {
+      "object_ids": [
+        108
+      ],
+      "query_export_gaussians": 51582,
+      "full_scene_gaussians_with_mapped_ids": 51582,
+      "count_difference": 0,
+      "relative_count_error": 0.0,
+      "fraction_of_all_scene_gaussians": 0.060364631302025615,
+      "gaussians_by_object_id": {
+        "108": 51582
+      },
+      "centroid_reconstruction_xyz": [
+        -0.2681269943714142,
+        1.998901128768921,
+        2.125659465789795
+      ],
+      "robust_q01_q99_min_reconstruction_xyz": [
+        -4.752784252166748,
+        -1.4883061647415161,
+        0.29823413491249084
+      ],
+      "robust_q01_q99_max_reconstruction_xyz": [
+        3.0925002098083496,
+        6.577643871307373,
+        6.044155597686768
+      ],
+      "robust_extent_reconstruction_xyz": [
+        7.845284461975098,
+        8.065950393676758,
+        5.745921611785889
+      ],
+      "robust_extent_fraction_of_scene_xyz": [
+        0.38258877396583557,
+        0.2869900166988373,
+        0.29025799036026
+      ],
+      "bounded_bev_cells": 506,
+      "fraction_of_known_bev_cells": 0.01397944524256824,
+      "warnings": [],
+      "audit_status": "no-threshold-warning"
+    }
+  }
+}

@@ -75,6 +75,11 @@ regions may have been included. These are query-grounded ID mappings, not a trai
 human-category classifier or semantic OCC accuracy result. See
 [`docs/ramen_named_query_bev.md`](docs/ramen_named_query_bev.md).
 
+A full-scene audit confirms that the export itself is internally consistent: all 213,370
+rows correspond to the selected IDs. Object ID 1 contributes 169,409 rows (79.40%) and is
+the primary mask-review candidate; it is not automatically discarded without checking the
+per-view overlays.
+
 ### Real ILGS query export
 
 The adapter was run on an 18,223-Gaussian `pork belly` query export from the ILGS
